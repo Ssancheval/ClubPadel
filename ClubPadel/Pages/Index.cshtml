@@ -1,0 +1,70 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<link rel="stylesheet" type="text/css" href="~/css/index.css">
+
+<div class="text-center">
+    <img src="~/image/padel.png" id="logo" />
+</div>
+<div id="divPadre">
+    <div class="text-light text-center" id="divHijo">
+        <br />
+        <h3 class="text-light">Inicio Sesión</h3>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="container" style="padding:30px;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label asp-for="Cliente.user"></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input asp-for="Cliente.user" class="form-control" id="usuario" />
+                        </div>
+                        <span asp-validation-for="Cliente.user" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label asp-for="Cliente.password"></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input asp-for="Cliente.password" class="form-control" id="contrasena" />
+                        </div>
+                        <span asp-validation-for="Cliente.password" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="col-sm-4">
+                        <input type="submit" value="Inicio" class="btn btn-success form-control" />
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            @*Este boton es temporal, cuando se añada la pantalla de inicio de sesiom se podra quitar*@
+                            <a class="btn btn-dark form-control col-sm-12" asp-page="ReservasPistas">Reservas</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@*Pequeña prueba que muestra los datos de la tabla*@
+<div>
+    @foreach (var item in Model.Clientes)
+    { 
+        <p>@Html.DisplayFor(m => item.user)</p>
+        <p>@Html.DisplayFor(m => item.password)</p>
+    }
+</div>
