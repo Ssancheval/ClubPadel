@@ -35,7 +35,7 @@
                             <label asp-for="Cliente.password"></label>
                         </div>
                         <div class="col-sm-4">
-                            <input type="password" asp-for="Cliente.password" class="form-control" />@*id="contrasena"*@
+                            <input type="password" name="ContraseñaUsuario" asp-for="Cliente.password" class="form-control" />@*id="contrasena"*@
                         </div>
                         <span asp-validation-for="Cliente.password" class="text-danger"></span>
                     </div>
@@ -43,7 +43,7 @@
 
                 <div>
                     <div class="col-sm-4">
-                        <input type="submit" value="Inicio" asp-for="Cliente.user"  class="btn btn-success form-control" />
+                        <input type="submit" value="Inicio"  asp-for="Cliente.user" class="btn btn-success form-control" />@*asp-for="Cliente.user"*@
                     </div>
                 </div>
                 <br />

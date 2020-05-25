@@ -35,10 +35,11 @@ namespace ClubPadel.Pages
         }
 
         //si se añade el metodo onPost() es para añadir los datos a la base de datos        
-        public async Task<IActionResult> OnPost(String nombreUsuario)
+        public async Task<IActionResult> OnPost(String nombreUsuario,String contraseñaUsuario)
         {
             string nombreUsu = nombreUsuario;
-            if (ModelState.IsValid)
+            string contraseñaUsu = contraseñaUsuario;
+            if (!ModelState.IsValid)
             {
                 for (int i = 1; i <= 5; i++)//no me reconoce Clientes 
                 {//cambiar el i<= 5 por los numero id maximo de la base de datos
@@ -46,7 +47,7 @@ namespace ClubPadel.Pages
                     var clientito = await _db.Cliente.FindAsync(i);
                     if (clientito != null)
                     {
-                        if (clientito.user == nombreUsu)
+                        if (clientito.user == nombreUsu && clientito.password==contraseñaUsu)
                         {
                             return RedirectToPage("ReservasPista");
                         }
