@@ -23,7 +23,7 @@
                             <label asp-for="Cliente.user"></label>
                         </div>
                         <div class="col-sm-4">
-                            <input asp-for="Cliente.user" class="form-control" id="usuario" />
+                            <input name="NombreUsuario" asp-for="Cliente.user" class="form-control" />@* id="usuario"*@
                         </div>
                         <span asp-validation-for="Cliente.user" class="text-danger"></span>
                     </div>
@@ -35,7 +35,7 @@
                             <label asp-for="Cliente.password"></label>
                         </div>
                         <div class="col-sm-4">
-                            <input type="password" asp-for="Cliente.password" class="form-control" id="contrasena" />
+                            <input type="password" asp-for="Cliente.password" class="form-control" />@*id="contrasena"*@
                         </div>
                         <span asp-validation-for="Cliente.password" class="text-danger"></span>
                     </div>
@@ -43,7 +43,7 @@
 
                 <div>
                     <div class="col-sm-4">
-                        <input type="submit" value="Inicio" class="btn btn-success form-control" />
+                        <input type="submit" value="Inicio" asp-for="Cliente.user"  class="btn btn-success form-control" />
                     </div>
                 </div>
                 <br />
@@ -60,11 +60,12 @@
     </div>
 </div>
 
-@*Pequeña prueba que muestra los datos de la tablas*@
-<div>
-    @foreach (var item in Model.Clientes)
-    { 
-        <p>@Html.DisplayFor(m => item.user)</p>
-        <p>@Html.DisplayFor(m => item.password)</p>
-    }
-</div>
+@*Pequeña prueba que muestra los datos de la tablas
+    <div>
+        @foreach (var item in Model.Clientes)
+        {
+            <p>@Html.DisplayFor(m => item.user)</p>
+            <p>@Html.DisplayFor(m => item.password)</p>
+        }
+    </div>
+*@
