@@ -35,7 +35,7 @@
                             <label asp-for="Cliente.password"></label>
                         </div>
                         <div class="col-sm-4">
-                            <input asp-for="Cliente.password" class="form-control" id="contrasena" />
+                            <input type="password" asp-for="Cliente.password" class="form-control" id="contrasena" />
                         </div>
                         <span asp-validation-for="Cliente.password" class="text-danger"></span>
                     </div>
@@ -51,7 +51,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             @*Este boton es temporal, cuando se añada la pantalla de inicio de sesiom se podra quitar*@
-                            <a class="btn btn-dark form-control col-sm-12" asp-page="ReservasPistas">Reservas</a>
+                            <a class="btn btn-dark form-control col-sm-12" asp-page="ReservasPista">Reservas</a>
                         </div>
                     </div>
                 </div>

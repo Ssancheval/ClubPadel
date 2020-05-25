@@ -43,7 +43,7 @@ namespace ClubPadel.Pages
             }
             // _db.Add(Cliente);
             //  await _db.SaveChangesAsync();
-            return RedirectToPage("ReservasPistas");
+            return RedirectToPage("ReservasPista");
         }
     }
 }
