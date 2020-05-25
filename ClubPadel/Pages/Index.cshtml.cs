@@ -54,10 +54,7 @@ namespace ClubPadel.Pages
                     }
                 }
             }
-            // _db.Add(Cliente);
-            //  await _db.SaveChangesAsync(); 
-            return Page();
-            
+            return Page();          
         }
     }
 }
