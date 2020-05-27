@@ -89,5 +89,36 @@ namespace ClubPadel.Pages
 
             return Page();
         }
-    }
+
+       /*también me da error en la conexión
+        *public async Task<IActionResult> OnPost(string nombreUsu, string contraseñaUsu)
+        {
+            string nombreUsuario = nombreUsu;//coge el parámetro del nombre
+            string contraseñaUsuario = contraseñaUsu;
+
+            if (!ModelState.IsValid)
+            {
+                using (SqlConnection conexionconsql = new SqlConnection(ConfigurationManager.ConnectionStrings["ConexionInicioSesion"].ConnectionString))
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "Cliente";
+                    cmd.Connection = conexionconsql;
+                    conexionconsql.Open();
+                    foreach (Cliente item in Clientes)
+                    {
+                        if (item != null)
+                        {
+                            if (item.Usuario == nombreUsuario && item.Contraseña == contraseñaUsuario)
+                            {
+                                return RedirectToPage("PaginaInicial");
+                            }
+                        }
+                    }
+                    conexionconsql.Close();
+                }
+
+                return RedirectToPage();//cuando se guarde nos lleva a la página indice
+            }*/
+        }
 }
