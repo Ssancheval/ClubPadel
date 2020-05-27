@@ -66,11 +66,11 @@ namespace ClubPadel.Pages
             {
                 var cb = new SqlConnectionStringBuilder();
 
-                cb.DataSource = "Server=(localdb)\\mssqllocaldb;Database=ClubPadel";
+                cb.DataSource = "(localdb)\\mssqllocaldb";
                 using (var connection = new SqlConnection(cb.ConnectionString))
                 {
                     connection.Open();
-                    foreach (Cliente item in Clientes)
+                    foreach (Cliente item in Clientes)//da error en Clientes nullreference exception
                     {
                         if (item != null)
                         {
