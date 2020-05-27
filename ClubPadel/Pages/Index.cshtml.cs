@@ -66,7 +66,7 @@ namespace ClubPadel.Pages
             {
                 var cb = new SqlConnectionStringBuilder();
 
-                cb.DataSource = "Server=(localdb)\\mssqllocaldb;Database=ClubPadel;Trusted_Connection=True;MultipleActiveResultSets=true";
+                cb.DataSource = "Server=(localdb)\\mssqllocaldb;Database=ClubPadel";
                 using (var connection = new SqlConnection(cb.ConnectionString))
                 {
                     connection.Open();
@@ -93,8 +93,6 @@ namespace ClubPadel.Pages
        /*también me da error en la conexión
         *public async Task<IActionResult> OnPost(string nombreUsu, string contraseñaUsu)
         {
-            string nombreUsuario = nombreUsu;//coge el parámetro del nombre
-            string contraseñaUsuario = contraseñaUsu;
 
             if (!ModelState.IsValid)
             {
@@ -109,7 +107,7 @@ namespace ClubPadel.Pages
                     {
                         if (item != null)
                         {
-                            if (item.Usuario == nombreUsuario && item.Contraseña == contraseñaUsuario)
+                            if (item.Usuario == nombreUsu && item.Contraseña == contraseñaUsu)
                             {
                                 return RedirectToPage("PaginaInicial");
                             }
