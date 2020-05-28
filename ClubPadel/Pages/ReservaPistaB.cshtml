@@ -1,8 +1,10 @@
 ﻿@page
-@model ReservasPistaModel
+@model ClubPadel.Pages.ReservaPistaBModel
 @{
-    ViewData["Title"] = "ReservasPistas";
+    ViewData["Title"] = "ReservasPistasB";
 }
+
+<h1>Reservas Pistas B</h1>
 
 <div class="container row" id="titulo">
     <div class="col-6">
@@ -73,7 +75,7 @@
             return year + "-" + month + "-" + day;
         }
     }
-    document.getElementById("fecha").value = fechaActual();
+    document.getElementById("fecha").value = fechaLimite();
 
     function fechaLimite() {
         var date = new Date();
