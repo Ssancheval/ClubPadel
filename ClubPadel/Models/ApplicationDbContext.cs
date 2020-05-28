@@ -14,5 +14,7 @@ namespace ClubPadel.Models
         }
 
         public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<TablaHoy> TablaHoy { get; set; }
+        public DbSet<TablaMañana> TablaMañana { get; set; }
     }
 }
