@@ -14,7 +14,10 @@
 </div>
 <br />
 <div class="4" id="fechaPadre">
-    <input type="date" id="fecha" />
+    <input id="fecha" type="date"
+           min="0-0-0"
+           max="0-0-0" />
+    <input id="button" type="button" onclick="buscarHoras()" value="Buscar Horas" />
 </div>
 <br />
 <div class="row text-center" id="cuadroTexto">
@@ -60,9 +63,8 @@
 <script>
 
     // Formato de la fecha actual
-    var fecha = document.querySelector('input[type="date"]');
 
-    function formatoFecha() {
+    function fechaActual() {
         let date = new Date();
         let year = date.getFullYear().toString();
         let day = date.getDate().toString();
@@ -72,9 +74,22 @@
         } else {
             return year + "-" + month + "-" + day;
         }
-
     }
-    fecha.value = formatoFecha();
+    document.getElementById("fecha").value = fechaActual();
+
+    function fechaLimite() {
+        var date = new Date();
+        var day = date.getDate() + 1;
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear().toString();
+        if (month < 9) {
+            return year + "-0" + month.toString() + "-" + day;
+        } else {
+            return year + "-" + month + "-" + day;
+        }
+    }
+    document.getElementById("fecha").setAttribute("max", fechaLimite());
+    document.getElementById("fecha").setAttribute("min", fechaActual());
 
     // Hacer visible la alerta
     function hacerVisible() {
@@ -211,6 +226,25 @@
                 element2.className = "btn btn-success btn-sm visible";
 
                 hacerInvisible();
+            });
+        });
+    }
+
+    function buscarHoras() {
+        $(document).ready(function () {
+            $("#button").click(function () {
+                let valor = document.getElementById("fecha").value;
+                let msValor = Date.parse(valor);
+                let fechaValor = new Date(msValor);
+
+                let ms1 = Date.parse(fechaActual());
+                let fecha1 = new Date(ms1);
+
+                if (fechaValor.getTime() == fecha1.getTime()) {
+                    location.href = "/ReservasPistasA";
+                } else {
+                    location.href = "/ReservasPistasB";
+                }
             });
         });
     }
