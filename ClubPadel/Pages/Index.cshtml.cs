@@ -60,7 +60,7 @@ namespace ClubPadel.Pages
               return Page();    
          }*/
 
-        public async Task<IActionResult> OnPost(String nombreUsuario, String contraseñaUsuario)
+        public async Task<IActionResult> OnPost(string nombreUsuario, string contraseñaUsuario)
         {
             try
             {
