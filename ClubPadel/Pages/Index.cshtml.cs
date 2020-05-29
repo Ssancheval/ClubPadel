@@ -66,7 +66,7 @@ namespace ClubPadel.Pages
             {
                 var cb = new SqlConnectionStringBuilder();
 
-                cb.DataSource = "(localdb)\\mssqllocaldb";
+                cb.DataSource = "Server=localhost\\CLUBPADEL";
                 using (var connection = new SqlConnection(cb.ConnectionString))
                 {
                     connection.Open();
