@@ -20,30 +20,30 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-5">
-                            <label asp-for="Cliente.user"></label>
+                            <label asp-for="Cliente.User"></label>
                         </div>
                         <div class="col-sm-4">
-                            <input name="NombreUsuario" asp-for="Cliente.user" class="form-control" />@* id="usuario"*@
+                            <input name="NombreUsuario" asp-for="Cliente.User" class="form-control" id="usuario"/>@* *@
                         </div>
-                        <span asp-validation-for="Cliente.user" class="text-danger"></span>
+                        <span asp-validation-for="Cliente.User" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-5">
-                            <label asp-for="Cliente.password"></label>
+                            <label asp-for="Cliente.Password"></label>
                         </div>
                         <div class="col-sm-4">
-                            <input type="password" name="ContraseñaUsuario" asp-for="Cliente.password" class="form-control" />@*id="contrasena"*@
+                            <input type="password" name="ContraseñaUsuario" asp-for="Cliente.Password" class="form-control" id="contrasena"/>@**@
                         </div>
-                        <span asp-validation-for="Cliente.password" class="text-danger"></span>
+                        <span asp-validation-for="Cliente.Password" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div>
                     <div class="col-sm-4">
-                        <input type="submit" value="Inicio"  asp-for="Cliente.user" class="btn btn-success form-control" />@*asp-for="Cliente.user"*@
+                        <input type="submit" value="Inicio"  asp-for="Cliente.User" class="btn btn-success form-control" />
                     </div>
                 </div>
                 <br />

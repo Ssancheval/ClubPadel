@@ -35,6 +35,38 @@ namespace ClubPadel.Pages
             Clientes = await _db.Cliente.ToListAsync();
         }
 
+        
+        public async Task<IActionResult> OnPost(string nombreUsuario, string contraseñaUsuario)
+        {
+            try
+            {
+                var cb = new SqlConnectionStringBuilder();
+                var clientito = _db.Cliente;
+
+                cb.DataSource = "Server=localhost\\CLUBPADEL";
+                using (var connection = new SqlConnection(cb.ConnectionString))
+                {
+                    //connection.Open(); --> esta de más
+                    foreach (Cliente item in clientito)
+                    {
+                        if (item != null)
+                        {
+                            if (item.User == nombreUsuario && item.Password == contraseñaUsuario)
+                            {
+                                return RedirectToPage("ReservasPistaA");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            return Page();
+        }
+
         //si se añade el metodo onPost() es para añadir los datos a la base de datos      
         //Opción con for
 
@@ -50,7 +82,7 @@ namespace ClubPadel.Pages
                       var clientito = await _db.Cliente.FindAsync(i);
                       if (clientito != null)
                       {
-                          if (clientito.user == nombreUsu && clientito.password==contraseñaUsu)
+                          if (clientito.User == nombreUsu && clientito.Password == contraseñaUsu)
                           {
                               return RedirectToPage("ReservasPista");
                           }
@@ -59,64 +91,5 @@ namespace ClubPadel.Pages
               }
               return Page();    
          }*/
-
-        public async Task<IActionResult> OnPost(string nombreUsuario, string contraseñaUsuario)
-        {
-            try
-            {
-                var cb = new SqlConnectionStringBuilder();
-
-                cb.DataSource = "Server=localhost\\CLUBPADEL";
-                using (var connection = new SqlConnection(cb.ConnectionString))
-                {
-                    connection.Open();
-                    foreach (Cliente item in Clientes)//da error en Clientes nullreference exception
-                    {
-                        if (item != null)
-                        {
-                            if (item.user == nombreUsuario && item.password == contraseñaUsuario)
-                            {
-                                return RedirectToPage("ReservasPistas");
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-
-            return Page();
-        }
-
-       /*también me da error en la conexión
-        *public async Task<IActionResult> OnPost(string nombreUsu, string contraseñaUsu)
-        {
-
-            if (!ModelState.IsValid)
-            {
-                using (SqlConnection conexionconsql = new SqlConnection(ConfigurationManager.ConnectionStrings["ConexionInicioSesion"].ConnectionString))
-                {
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "Cliente";
-                    cmd.Connection = conexionconsql;
-                    conexionconsql.Open();
-                    foreach (Cliente item in Clientes)
-                    {
-                        if (item != null)
-                        {
-                            if (item.Usuario == nombreUsu && item.Contraseña == contraseñaUsu)
-                            {
-                                return RedirectToPage("PaginaInicial");
-                            }
-                        }
-                    }
-                    conexionconsql.Close();
-                }
-
-                return RedirectToPage();//cuando se guarde nos lleva a la página indice
-            }*/
-        }
+    }
 }
