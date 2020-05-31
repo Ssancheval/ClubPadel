@@ -27,15 +27,28 @@ namespace ClubPadel.Pages
         }
 
         //si se añade el metodo onPost() es para añadir los datos a la base de datos        
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost(string btnreserva)
         {
+            String valorreserva = btnreserva;
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            // _db.Add(Cliente);
-            //  await _db.SaveChangesAsync();
-            return RedirectToPage("ReservasPistas");
+            return RedirectToPage("ReservaPistaB");
+            /* public async Task<IActionResult> OnPost()
+        {
+            if (ModelState.IsValid)
+            { //Busca la informmación de esa Persona por su ID
+                var PersonadelaDb = await _db.Persona.FindAsync(Persona.ID);
+                PersonadelaDb.Nombre = Persona.Nombre;
+                PersonadelaDb.Apellido = Persona.Apellido;
+
+                await _db.SaveChangesAsync();
+                return RedirectToPage("Indice");
+            }
+            return RedirectToPage();
+        }*/
         }
     }
 }
