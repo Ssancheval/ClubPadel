@@ -12,7 +12,9 @@ namespace ClubPadel.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    reserva = table.Column<string>(nullable: true),
+                    idCliente = table.Column<int>(nullable: false),
+                    nomCliente = table.Column<string>(nullable: true),
+                    estado = table.Column<string>(nullable: true),
                     hora = table.Column<string>(nullable: false),
                     fecha = table.Column<string>(nullable: false)
                 },
@@ -27,7 +29,9 @@ namespace ClubPadel.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    reserva = table.Column<string>(nullable: true),
+                    idCliente = table.Column<int>(nullable: false),
+                    nomCliente = table.Column<string>(nullable: true),
+                    estado = table.Column<string>(nullable: true),
                     hora = table.Column<string>(nullable: false),
                     fecha = table.Column<string>(nullable: false)
                 },

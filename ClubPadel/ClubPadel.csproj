@@ -6,6 +6,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200528085643_AgregarTablaFechas.cs" />
+    <Compile Remove="Migrations\20200528085643_AgregarTablaFechas.Designer.cs" />
+    <Compile Remove="Migrations\20200529094635_Relaciones1.cs" />
+    <Compile Remove="Migrations\20200529094635_Relaciones1.Designer.cs" />
+    <Compile Remove="Migrations\20200529095548_Relaciones2.cs" />
+    <Compile Remove="Migrations\20200529095548_Relaciones2.Designer.cs" />
+    <Compile Remove="Migrations\20200529095938_Relaciones3.cs" />
+    <Compile Remove="Migrations\20200529095938_Relaciones3.Designer.cs" />
+    <Compile Remove="Migrations\20200529100026_Relaciones4.cs" />
+    <Compile Remove="Migrations\20200529100026_Relaciones4.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />

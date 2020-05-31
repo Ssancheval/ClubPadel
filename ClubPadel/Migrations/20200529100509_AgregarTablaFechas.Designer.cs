@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClubPadel.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200528085643_AgregarTablaFechas")]
+    [Migration("20200529100509_AgregarTablaFechas")]
     partial class AgregarTablaFechas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,6 +47,9 @@ namespace ClubPadel.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("estado")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("fecha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -55,7 +58,10 @@ namespace ClubPadel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("reserva")
+                    b.Property<int>("idCliente")
+                        .HasColumnType("int");
+
+                    b.Property<string>("nomCliente")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -70,6 +76,9 @@ namespace ClubPadel.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("estado")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("fecha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -78,7 +87,10 @@ namespace ClubPadel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("reserva")
+                    b.Property<int>("idCliente")
+                        .HasColumnType("int");
+
+                    b.Property<string>("nomCliente")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
