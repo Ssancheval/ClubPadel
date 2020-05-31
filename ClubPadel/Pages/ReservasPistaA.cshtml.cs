@@ -36,19 +36,7 @@ namespace ClubPadel.Pages
                 return Page();
             }
             return RedirectToPage("ReservaPistaB");
-            /* public async Task<IActionResult> OnPost()
-        {
-            if (ModelState.IsValid)
-            { //Busca la informmación de esa Persona por su ID
-                var PersonadelaDb = await _db.Persona.FindAsync(Persona.ID);
-                PersonadelaDb.Nombre = Persona.Nombre;
-                PersonadelaDb.Apellido = Persona.Apellido;
-
-                await _db.SaveChangesAsync();
-                return RedirectToPage("Indice");
-            }
-            return RedirectToPage();
-        }*/
+           
         }
     }
 }

@@ -35,48 +35,24 @@ namespace ClubPadel.Pages
             Clientes = await _db.Cliente.ToListAsync();
         }
 
-        //si se añade el metodo onPost() es para añadir los datos a la base de datos      
-        //Opción con for
-
-        /* public async Task<IActionResult> OnPost(String nombreUsuario,String contraseñaUsuario)
-         {
-              string nombreUsu = nombreUsuario;
-              string contraseñaUsu = contraseñaUsuario;
-              if (!ModelState.IsValid)
-              {
-                  for (int i = 1; i <= 5; i++)//no me reconoce Clientes 
-                  {//cambiar el i<= 5 por los numero id maximo de la base de datos
-
-                      var clientito = await _db.Cliente.FindAsync(i);
-                      if (clientito != null)
-                      {
-                          if (clientito.user == nombreUsu && clientito.password==contraseñaUsu)
-                          {
-                              return RedirectToPage("ReservasPista");
-                          }
-                      }
-                  }
-              }
-              return Page();    
-         }*/
-
+       
         public async Task<IActionResult> OnPost(String nombreUsuario, String contraseñaUsuario)
         {
             try
             {
                 var cb = new SqlConnectionStringBuilder();
+                var clientito = _db.Cliente;
 
                 cb.DataSource = "localhost\\CLUBPADEL";
                 using (var connection = new SqlConnection(cb.ConnectionString))
                 {
-                    connection.Open();
-                    foreach (Cliente item in Clientes)//da error en Clientes nullreference exception
+                    foreach (Cliente item in clientito)
                     {
                         if (item != null)
                         {
-                            if (item.user == nombreUsuario && item.password == contraseñaUsuario)
+                            if (item.User == nombreUsuario && item.Password == contraseñaUsuario)
                             {
-                                return RedirectToPage("ReservasPistas");
+                                return RedirectToPage("ReservasPistaA");
                             }
                         }
                     }
@@ -90,33 +66,6 @@ namespace ClubPadel.Pages
             return Page();
         }
 
-       /*también me da error en la conexión
-        *public async Task<IActionResult> OnPost(string nombreUsu, string contraseñaUsu)
-        {
-
-            if (!ModelState.IsValid)
-            {
-                using (SqlConnection conexionconsql = new SqlConnection(ConfigurationManager.ConnectionStrings["ConexionInicioSesion"].ConnectionString))
-                {
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "Cliente";
-                    cmd.Connection = conexionconsql;
-                    conexionconsql.Open();
-                    foreach (Cliente item in Clientes)
-                    {
-                        if (item != null)
-                        {
-                            if (item.Usuario == nombreUsu && item.Contraseña == contraseñaUsu)
-                            {
-                                return RedirectToPage("PaginaInicial");
-                            }
-                        }
-                    }
-                    conexionconsql.Close();
-                }
-
-                return RedirectToPage();//cuando se guarde nos lleva a la página indice
-            }*/
+       
         }
 }
