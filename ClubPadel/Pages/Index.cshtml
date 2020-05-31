@@ -60,14 +60,13 @@
     </div>
 </div>
 
-@*Pequeña prueba que muestra los datos de la tablas
+Pequeña prueba que muestra los datos de la tablas
     si quieres ver los datos ve al explorador de servidores y busca la base de datos
     sino esto va a dar error
     <div>
         @foreach (var item in Model.Clientes)
         {
-            <p>@Html.DisplayFor(m => item.user)</p>
-            <p>@Html.DisplayFor(m => item.password)</p>
+            <p>@Html.DisplayFor(m => item.User)</p>
+            <p>@Html.DisplayFor(m => item.Password)</p>
         }
     </div>
-*@

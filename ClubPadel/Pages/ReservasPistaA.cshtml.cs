@@ -5,25 +5,33 @@ using System.Threading.Tasks;
 using ClubPadel.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace ClubPadel.Pages
 {
     public class ReservasPistaModel : PageModel
     {
+        private readonly ApplicationDbContext _db;
+
+        //-----------------------------------
+
         [BindProperty]
-        public Cliente Cliente { get; set; }
+        public TablaHoy TablaHoy { get; set; }
 
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<ReservasPistaModel> _logger;
 
-        public ReservasPistaModel(ILogger<IndexModel> logger)
+        public ReservasPistaModel(ILogger<ReservasPistaModel> logger, ApplicationDbContext db)
         {
             _logger = logger;
+            _db = db;
         }
+        public IEnumerable<TablaHoy> TablaHoys { get; set; }
 
-        public void OnGet()
+        public async Task OnGet()
         {
-
+            TablaHoys = await _db.TablaHoy.ToListAsync();
         }
 
         //si se añade el metodo onPost() es para añadir los datos a la base de datos        

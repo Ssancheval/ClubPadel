@@ -65,7 +65,5 @@ namespace ClubPadel.Pages
 
             return Page();
         }
-
-       
-        }
+    }
 }
