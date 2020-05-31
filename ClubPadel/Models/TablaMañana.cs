@@ -10,10 +10,13 @@ namespace ClubPadel.Models
     {
         [Key]
         public int Id { get; set; }
-        public string reserva { get; set; }
+        public int idCliente { get; set; }
+        public string nomCliente { get; set; }
+        public string estado { get; set; }
         [Required]
         public string hora { get; set; }
         [Required]
         public string fecha { get; set; }
     }
+
 }

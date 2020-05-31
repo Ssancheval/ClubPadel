@@ -45,6 +45,9 @@ namespace ClubPadel.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("estado")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("fecha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -53,7 +56,10 @@ namespace ClubPadel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("reserva")
+                    b.Property<int>("idCliente")
+                        .HasColumnType("int");
+
+                    b.Property<string>("nomCliente")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -68,6 +74,9 @@ namespace ClubPadel.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("estado")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("fecha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -76,7 +85,10 @@ namespace ClubPadel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("reserva")
+                    b.Property<int>("idCliente")
+                        .HasColumnType("int");
+
+                    b.Property<string>("nomCliente")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
