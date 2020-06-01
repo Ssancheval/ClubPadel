@@ -37,7 +37,7 @@ namespace ClubPadel.Pages
         //si se añade el metodo onPost() es para añadir los datos a la base de datos        
         public async Task<IActionResult> OnPost(string btnreserva)
         {
-            String valorreserva = btnreserva;
+            //String valorreserva = btnreserva;
 
             if (!ModelState.IsValid)
             {
