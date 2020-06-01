@@ -23,7 +23,7 @@
                             <label asp-for="Cliente.User"></label>
                         </div>
                         <div class="col-sm-4">
-                            <input name="NombreUsuario" asp-for="Cliente.User" class="form-control" id="usuario"/>@* *@
+                            <input name="NombreUsuario" asp-for="Cliente.User" class="form-control" id="usuario" />@* *@
                         </div>
                         <span asp-validation-for="Cliente.User" class="text-danger"></span>
                     </div>
@@ -35,7 +35,7 @@
                             <label asp-for="Cliente.Password"></label>
                         </div>
                         <div class="col-sm-4">
-                            <input type="password" name="ContraseñaUsuario" asp-for="Cliente.Password" class="form-control" id="contrasena"/>@**@
+                            <input type="password" name="ContraseñaUsuario" asp-for="Cliente.Password" class="form-control" id="contrasena" />@**@
                         </div>
                         <span asp-validation-for="Cliente.Password" class="text-danger"></span>
                     </div>
@@ -43,7 +43,7 @@
 
                 <div>
                     <div class="col-sm-4">
-                        <input type="submit" value="Inicio"  asp-for="Cliente.User" class="btn btn-success form-control" />
+                        <input type="submit" value="Inicio" asp-for="Cliente.User" class="btn btn-success form-control" />
                     </div>
                 </div>
                 <br />
@@ -59,14 +59,15 @@
         </form>
     </div>
 </div>
-
-Pequeña prueba que muestra los datos de la tablas
-    si quieres ver los datos ve al explorador de servidores y busca la base de datos
-    sino esto va a dar error
-    <div>
-        @foreach (var item in Model.Clientes)
-        {
-            <p>@Html.DisplayFor(m => item.User)</p>
-            <p>@Html.DisplayFor(m => item.Password)</p>
-        }
-    </div>
+@*
+    Pequeña prueba que muestra los datos de la tablas
+        si quieres ver los datos ve al explorador de servidores y busca la base de datos
+        sino esto va a dar error
+        <div>
+            @foreach (var item in Model.Clientes)
+            {
+                <p>@Html.DisplayFor(m => item.User)</p>
+                <p>@Html.DisplayFor(m => item.Password)</p>
+            }
+        </div>
+*@

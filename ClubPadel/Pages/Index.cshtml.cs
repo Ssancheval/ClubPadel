@@ -15,8 +15,6 @@ namespace ClubPadel.Pages
     {
         private readonly ApplicationDbContext _db;
 
-        //-----------------------------------
-
         [BindProperty]
         public Cliente Cliente { get; set; }
 
@@ -34,8 +32,7 @@ namespace ClubPadel.Pages
         {
             Clientes = await _db.Cliente.ToListAsync();
         }
-
-       
+   
         public async Task<IActionResult> OnPost(String nombreUsuario, String contraseñaUsuario)
         {
             try
@@ -62,7 +59,6 @@ namespace ClubPadel.Pages
             {
                 Console.WriteLine(e.ToString());
             }
-
             return Page();
         }
     }
