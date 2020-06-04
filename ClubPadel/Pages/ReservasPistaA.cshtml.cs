@@ -16,6 +16,9 @@ namespace ClubPadel.Pages
         private readonly ApplicationDbContext _db;
 
         [BindProperty]
+        public TablaPrueba TablaPrueba { get; set; }
+
+        [BindProperty]
         public TablaHoy TablaHoy { get; set; }
 
         private readonly ILogger<ReservasPistaModel> _logger;
