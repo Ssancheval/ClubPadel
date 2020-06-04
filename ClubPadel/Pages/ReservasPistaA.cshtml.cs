@@ -54,23 +54,16 @@ namespace ClubPadel.Pages
 
         public async Task<IActionResult> OnPostCambio(string estadito)
         {
-
-            var cb = new SqlConnectionStringBuilder();
             var Pruebita = _db.TablaPrueba;
 
-            cb.DataSource = "localhost\\CLUBPADEL";
-            using (var connection = new SqlConnection(cb.ConnectionString))
+            using (var db = _db)
             {
+                var estado = db.TablaPrueba.SingleOrDefault(x => x.Estado.Equals("Reservado"));
                 foreach (var item in Pruebita)
                 {
-                    if (item.Estado == estadito)
-                    {                       
-                        item.Estado = "Reservado";
-                        _db.Entry(item.Estado).State = EntityState.Modified;//nose pa que sirve
-                    }
-                    if (item.Estado == "Reservado")
+                    if (estado != null)
                     {
-                        item.Estado = "Libre";
+                        estado.Estado = "Libre";
                     }
                 }
             }
