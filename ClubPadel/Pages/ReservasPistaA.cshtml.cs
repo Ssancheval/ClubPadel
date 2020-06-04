@@ -49,5 +49,57 @@ namespace ClubPadel.Pages
             return RedirectToPage("ReservaPistaB");
            
         }
+
+
+        public async Task<IActionResult> OnPostCambio(int ideito)
+        {
+            int idd = ideito;
+
+            var tablita = await _db.TablaPrueba.FindAsync(idd);//busca en la base de datos el registro
+            if (tablita == null)//si no encuentra el registro no hace nada
+            {
+                return Page();
+            }
+            if (tablita != null)
+            {
+                if (tablita.Estado.Equals("Libre     "))//NO SE PORQUE EL LIBRE TIENE ESPACIOS PERO ENTRA
+                {
+                    tablita.Estado = "Ocupadoooo";
+                    return Page();
+                }
+                else if (tablita.Estado.Equals("Ocupadoooo"))//ENTRA EN LOS DOS IFs
+                {
+                    tablita.Estado = "Libre     ";
+                    return Page(); ;
+                }
+            }
+            //_db.Entry(tablita).State = EntityState.Modified;
+            await _db.SaveChangesAsync();//update
+            return Page();
+
+
+
+            //NO BORRAR --> PRUEBAS QUE HARÉ LUEGO
+            /*var cb = new SqlConnectionStringBuilder();
+            var Pruebita = _db.TablaPrueba;
+
+            cb.DataSource = "localhost\\CLUBPADEL";
+            using (var connection = new SqlConnection(cb.ConnectionString))
+            {
+                foreach (var item in Pruebita)
+                {
+                    if (item.Estado == estadito)
+                    {                       
+                        item.Estado = "Reservado";
+                        //_db.Entry(item.Estado).State = EntityState.Modified;//nose pa que sirve
+                    }
+                    if (item.Estado == "Reservado")
+                    {
+                        item.Estado = "Libre";
+                    }
+                }
+            }*/
+
+        }
     }
 }
