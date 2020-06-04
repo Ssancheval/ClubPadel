@@ -14,6 +14,7 @@ namespace ClubPadel.Models
         }
 
         public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<Reserva> Reserva { get; set; }
         public DbSet<TablaPrueba> TablaPrueba { get; set; }
     }
 }
