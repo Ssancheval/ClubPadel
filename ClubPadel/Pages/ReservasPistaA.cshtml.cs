@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using ClubPadel.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -32,49 +31,53 @@ namespace ClubPadel.Pages
         }
         public IEnumerable<TablaHoy> TablaHoys { get; set; }
 
-        public IEnumerable<TablaPrueba> TablaPruebas { get; set; }
+        public IEnumerable<TablaPrueba> TablaPruebas { get; set; }//no es lo que queremos nos da null por alguna razón 
 
         public async Task OnGet()
         {
-            TablaHoys = await _db.TablaHoy.ToListAsync();
             TablaPruebas = await _db.TablaPrueba.ToListAsync();
+            TablaHoys = await _db.TablaHoy.ToListAsync();
+           
         }
 
         //si se añade el metodo onPost() es para añadir los datos a la base de datos        
-        public async Task<IActionResult> OnPost(string btnreserva)
+        public async Task<IActionResult> OnPost()
         {
-            //String valorreserva = btnreserva;
-
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            return RedirectToPage("ReservaPistaB");
-           
+                return RedirectToPage("ReservaPistaB");
         }
 
-        public async Task<IActionResult> OnPostReserva()
+
+
+        public async Task<IActionResult> OnPostCambio(string estadito)
         {
-            
-            if (ModelState.IsValid)
+
+            var cb = new SqlConnectionStringBuilder();
+            var Pruebita = _db.TablaPrueba;
+
+            cb.DataSource = "localhost\\CLUBPADEL";
+            using (var connection = new SqlConnection(cb.ConnectionString))
             {
-                var cb = new SqlConnectionStringBuilder();
-                var prueba = _db.TablaPrueba;
-                cb.DataSource = "localhost\\CLUBPADEL";
-                using (var connection = new SqlConnection(cb.ConnectionString))
+                foreach (var item in Pruebita)
                 {
-                    foreach (var elemento in prueba)
+                    if (item.Estado == estadito)
+                    {                       
+                        item.Estado = "Reservado";
+                        _db.Entry(item.Estado).State = EntityState.Modified;//nose pa que sirve
+                    }
+                    if (item.Estado == "Reservado")
                     {
-                        if (elemento.Estado.Equals("Reservado"))
-                        {
-                            elemento.Estado = "Libre";
-                            
-                        }
+                        item.Estado = "Libre";
                     }
                 }
             }
-            await _db.SaveChangesAsync();
+            await _db.SaveChangesAsync();//update
+
             return Page();
         }
-    }
+
+        }
 }
