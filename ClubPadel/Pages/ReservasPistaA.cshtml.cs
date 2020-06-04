@@ -57,21 +57,22 @@ namespace ClubPadel.Pages
             var tablita = await _db.TablaPrueba.FindAsync(idd);//busca en la base de datos el registro
             if (tablita == null)//si no encuentra el registro no hace nada
             {
-                return NotFound();
+                return Page();
             }
             if (tablita != null)
             {
-                if (tablita.Estado.ToString() == "Libre     ")//NO SE PORQUE EL LIBRE TIENE ESPACIOS PERO ENTRA
+                if (tablita.Estado.Equals("Libre     "))//NO SE PORQUE EL LIBRE TIENE ESPACIOS PERO ENTRA
                 {                 
                     tablita.Estado = "Ocupadoooo";
-                   
+                    return Page();
                 }
-                if (tablita.Estado.ToString() == "Ocupadoooo")//ENTRA EN LOS DOS IFs
+                else if(tablita.Estado.Equals("Ocupadoooo"))//ENTRA EN LOS DOS IFs
                 {
-                    tablita.Estado = "Libre     ";                  
+                    tablita.Estado = "Libre     ";
+                        return Page(); ;                  
                 }
             }
-            //_db.Entry(tablita.Estado).State = EntityState.Modified;
+            //_db.Entry(tablita).State = EntityState.Modified;
             await _db.SaveChangesAsync();//update
             return Page();
 
