@@ -17,6 +17,7 @@ namespace ClubPadel.Pages
 
         [BindProperty]
         public TablaHoy TablaHoy { get; set; }
+        public TablaPrueba tablaPrueba { get; set; }
 
         private readonly ILogger<ReservasPistaModel> _logger;
 
@@ -26,6 +27,8 @@ namespace ClubPadel.Pages
             _db = db;
         }
         public IEnumerable<TablaHoy> TablaHoys { get; set; }
+
+        public IEnumerable<TablaHoy> TablaPruebas { get; set; }
 
         public async Task OnGet()
         {
