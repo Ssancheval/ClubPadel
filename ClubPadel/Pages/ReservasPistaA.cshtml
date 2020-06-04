@@ -49,12 +49,12 @@
             <th>Estado</th>
             <th>Nombre</th>
         </tr>
-        @foreach (var item in Model.TablaPruebas)//da error aquí pero ejecuta el cambio
+        @foreach (var item in Model.Reservas)//da error aquí pero ejecuta el cambio
         {
             <tr>
                 <td>@Html.DisplayFor(m => item.Id)</td>
-                <td>@Html.DisplayFor(m => item.Estado)</td>
-                <td>@Html.DisplayFor(m => item.Nombre)</td>
+                <td>@Html.DisplayFor(m => item.Hora)</td>
+                <td>@Html.DisplayFor(m => item.Fecha)</td>
                 <td>
                     <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
                 </td>
@@ -80,12 +80,11 @@
             <th>Reservas</th>
         </tr>
 
-        @foreach (var item in Model.TablaHoys)
+        @foreach (var item in Model.Reservas)
         {
             <tr id="horasHijo">
-                <td>@Html.DisplayFor(m => item.hora)</td>
-                <td>@Html.DisplayFor(m => item.estado)</td>
-                <td>@Html.DisplayFor(m => item.fecha)</td>
+                <td>@Html.DisplayFor(m => item.Hora)</td>
+                <td>@Html.DisplayFor(m => item.Fecha)</td>
                 <td>
                     <a class="btn btn-success btn-sm" style="color:white" value="btnreserva">Reservar</a>
                     <a class="btn btn-danger btn-sm invisible" style="color:white">Cancelar</a>
