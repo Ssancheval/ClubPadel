@@ -34,10 +34,9 @@ namespace ClubPadel.Pages
         public IEnumerable<TablaPrueba> TablaPruebas { get; set; }//no es lo que queremos nos da null por alguna razón 
 
         public async Task OnGet()
-        {
-            TablaPruebas = await _db.TablaPrueba.ToListAsync();
+        {          
             TablaHoys = await _db.TablaHoy.ToListAsync();
-           
+           TablaPruebas = await _db.TablaPrueba.ToListAsync();
         }
 
         //si se añade el metodo onPost() es para añadir los datos a la base de datos        
@@ -51,11 +50,36 @@ namespace ClubPadel.Pages
         }
 
 
-
-        public async Task<IActionResult> OnPostCambio(string estadito)
+        public async Task<IActionResult> OnPostCambio(int ideito)
         {
+            int idd = ideito;
+            idd += 1;
 
-            var cb = new SqlConnectionStringBuilder();
+            var tablita = await _db.TablaPrueba.FindAsync(idd);//busca en la base de datos el registro
+            if (tablita == null)//si no encuentra el registro no hace nada
+            {
+                return NotFound();
+            }
+            if (tablita != null)
+            {
+                if (tablita.Estado.Equals("Libre     "))//ENTRA NO SE PORQUE EL LIBRE TIENE ESPACIOS
+                {
+                    //_db.Entry(tablita.Estado="Ocupao").State = EntityState.Modified;
+                    tablita.Estado = "Ocupadoooo";
+                }
+                if (tablita.Estado.Equals("Ocupadoooo"))
+                {
+                    tablita.Estado = "Libre     ";
+                }
+
+            }
+            await _db.SaveChangesAsync();//update
+            return Page();
+
+
+
+            //NO BORRAR PRUEBAS QUE HARÉ LUEGO
+            /*var cb = new SqlConnectionStringBuilder();
             var Pruebita = _db.TablaPrueba;
 
             cb.DataSource = "localhost\\CLUBPADEL";
@@ -73,10 +97,8 @@ namespace ClubPadel.Pages
                         item.Estado = "Libre";
                     }
                 }
-            }
-            await _db.SaveChangesAsync();//update
+            }*/
 
-            return Page();
         }
 
         }

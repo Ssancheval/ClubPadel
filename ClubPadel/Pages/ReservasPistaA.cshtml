@@ -49,14 +49,14 @@
             <th>Estado</th>
             <th>Nombre</th>
         </tr>
-        @foreach (var variable in Model.TablaPruebas)
+        @foreach (var variable in Model.TablaPruebas)//da error aquí pero ejecuta el cambio
         {
             <tr>
                 <td>@Html.DisplayFor(m => variable.Id)</td>
                 <td>@Html.DisplayFor(m => variable.Estado)</td>
                 <td>@Html.DisplayFor(m => variable.Nombre)</td>
                 <td>
-                    <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@variable.Estado" asp-page-handler="OCambio" />
+                    <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@variable.Id" asp-page-handler="Cambio" />
                 </td>
             </tr>
         }
