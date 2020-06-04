@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using ClubPadel.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -49,6 +51,30 @@ namespace ClubPadel.Pages
             }
             return RedirectToPage("ReservaPistaB");
            
+        }
+
+        public async Task<IActionResult> OnPostReserva()
+        {
+            
+            if (ModelState.IsValid)
+            {
+                var cb = new SqlConnectionStringBuilder();
+                var prueba = _db.TablaPrueba;
+                cb.DataSource = "localhost\\CLUBPADEL";
+                using (var connection = new SqlConnection(cb.ConnectionString))
+                {
+                    foreach (var elemento in prueba)
+                    {
+                        if (elemento.Estado.Equals("Reservado"))
+                        {
+                            elemento.Estado = "Libre";
+                            
+                        }
+                    }
+                }
+            }
+            await _db.SaveChangesAsync();
+            return Page();
         }
     }
 }
