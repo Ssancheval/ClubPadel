@@ -30,9 +30,12 @@ namespace ClubPadel.Pages
         }
         public IEnumerable<TablaHoy> TablaHoys { get; set; }
 
+        public IEnumerable<TablaPrueba> TablaPruebas { get; set; }
+
         public async Task OnGet()
         {
             TablaHoys = await _db.TablaHoy.ToListAsync();
+            TablaPruebas = await _db.TablaPrueba.ToListAsync();
         }
 
         //si se añade el metodo onPost() es para añadir los datos a la base de datos        
