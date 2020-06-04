@@ -33,15 +33,13 @@ namespace ClubPadel.Pages
 
         public async Task OnGet()
         {
-            //TablaPruebas = await _db.TablaPrueba.ToListAsync();
+            TablaPruebas = await _db.TablaPrueba.ToListAsync();
             Reservas = await _db.Reserva.ToListAsync();
         }
 
         //si se añade el metodo onPost() es para añadir los datos a la base de datos        
-        public async Task<IActionResult> OnPost(string btnreserva)
+        public async Task<IActionResult> OnPost()
         {
-            String valorreserva = btnreserva;
-
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -49,7 +47,6 @@ namespace ClubPadel.Pages
             return RedirectToPage("ReservaPistaB");
            
         }
-
 
         public async Task<IActionResult> OnPostCambio(int ideito)
         {

@@ -42,14 +42,6 @@
 </div>
 <br />
 
-
-
-
-
-
-
-
-
 @*miooo*@
 <form method="post">
     <table class="table table-striped border">
@@ -91,7 +83,7 @@
                 <td>@Html.DisplayFor(m => item.Hora)</td>
                 <td>@Html.DisplayFor(m => item.Fecha)</td>
                 <td>
-                    <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                    <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@item.Id" />@*asp-page-handler="Cambio"*@
                 </td>
             </tr>
         }
