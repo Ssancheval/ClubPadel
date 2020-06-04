@@ -25,11 +25,11 @@ namespace ClubPadel.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("password")
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("user")
+                    b.Property<string>("User")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -38,62 +38,30 @@ namespace ClubPadel.Migrations
                     b.ToTable("Cliente");
                 });
 
-            modelBuilder.Entity("ClubPadel.Models.TablaHoy", b =>
+            modelBuilder.Entity("ClubPadel.Models.Reserva", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("estado")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("fecha")
+                    b.Property<string>("Fecha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("hora")
+                    b.Property<string>("Hora")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("idCliente")
+                    b.Property<int>("IdCliente")
                         .HasColumnType("int");
 
-                    b.Property<string>("nomCliente")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Pista")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TablaHoy");
-                });
-
-            modelBuilder.Entity("ClubPadel.Models.TablaMañana", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("estado")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("fecha")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("hora")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("idCliente")
-                        .HasColumnType("int");
-
-                    b.Property<string>("nomCliente")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TablaMañana");
+                    b.ToTable("Reserva");
                 });
 #pragma warning restore 612, 618
         }
