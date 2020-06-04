@@ -16,5 +16,12 @@ namespace ClubPadel.Models
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Reserva> Reserva { get; set; }
         public DbSet<TablaPrueba> TablaPrueba { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Server=localhost\\CLUBPADEL;Database=ClubPadel;Trusted_Connection=True;MultipleActiveResultSets=true");
+            base.OnConfiguring(optionsBuilder);
+        }
+
     }
 }
