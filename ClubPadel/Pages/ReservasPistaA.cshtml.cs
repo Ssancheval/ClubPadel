@@ -15,8 +15,6 @@ namespace ClubPadel.Pages
     {
         private readonly ApplicationDbContext _db;
 
-        //-----------------------------------
-
         [BindProperty]
         public TablaHoy TablaHoy { get; set; }
 
