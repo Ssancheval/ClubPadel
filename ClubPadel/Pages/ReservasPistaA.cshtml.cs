@@ -19,6 +19,7 @@ namespace ClubPadel.Pages
 
         [BindProperty]
         public TablaPrueba TablaPrueba { get; set; }
+        [BindProperty]
         public Reserva Reserva { get; set; }
 
         private readonly ILogger<ReservasPistaModel> _logger;
@@ -33,14 +34,14 @@ namespace ClubPadel.Pages
 
         public async Task OnGet()
         {
-            //TablaPruebas = await _db.TablaPrueba.ToListAsync();
+            TablaPruebas = await _db.TablaPrueba.ToListAsync();
             Reservas = await _db.Reserva.ToListAsync();
         }
 
         //si se añade el metodo onPost() es para añadir los datos a la base de datos        
         public async Task<IActionResult> OnPost(string btnreserva)
         {
-            String valorreserva = btnreserva;
+            string valorreserva = btnreserva;
 
             if (!ModelState.IsValid)
             {

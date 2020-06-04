@@ -49,14 +49,14 @@
             <th>Estado</th>
             <th>Nombre</th>
         </tr>
-        @foreach (var item in Model.Reservas)//da error aquí pero ejecuta el cambio
+        @foreach (var item in Model.TablaPruebas)//da error aquí pero ejecuta el cambio
         {
             <tr>
                 <td>@Html.DisplayFor(m => item.Id)</td>
-                <td>@Html.DisplayFor(m => item.Hora)</td>
-                <td>@Html.DisplayFor(m => item.Fecha)</td>
+                <td>@Html.DisplayFor(m => item.Estado)</td>
+                <td>@Html.DisplayFor(m => item.Nombre)</td>
                 <td>
-                    <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                    <input class="btn btn-success" type="submit" value="Reservar" asp-page-handler="Cambio" />
                 </td>
             </tr>
         }
