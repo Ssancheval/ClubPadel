@@ -34,10 +34,9 @@ namespace ClubPadel.Pages
         public IEnumerable<TablaPrueba> TablaPruebas { get; set; }//no es lo que queremos nos da null por alguna razón 
 
         public async Task OnGet()
-        {
-            TablaPruebas = await _db.TablaPrueba.ToListAsync();
+        {          
             TablaHoys = await _db.TablaHoy.ToListAsync();
-           
+           TablaPruebas = await _db.TablaPrueba.ToListAsync();
         }
 
         //si se añade el metodo onPost() es para añadir los datos a la base de datos        
@@ -51,26 +50,55 @@ namespace ClubPadel.Pages
         }
 
 
-
-        public async Task<IActionResult> OnPostCambio(string estadito)
+        public async Task<IActionResult> OnPostCambio(int ideito)
         {
-            var Pruebita = _db.TablaPrueba;
+            int idd = ideito;
 
-            using (var db = _db)
+            var tablita = await _db.TablaPrueba.FindAsync(idd);//busca en la base de datos el registro
+            if (tablita == null)//si no encuentra el registro no hace nada
             {
-                var estado = db.TablaPrueba.SingleOrDefault(x => x.Estado.Equals("Reservado"));
-                foreach (var item in Pruebita)
+                return NotFound();
+            }
+            if (tablita != null)
+            {
+                if (tablita.Estado.ToString() == "Libre     ")//NO SE PORQUE EL LIBRE TIENE ESPACIOS PERO ENTRA
+                {                 
+                    tablita.Estado = "Ocupadoooo";
+                   
+                }
+                if (tablita.Estado.ToString() == "Ocupadoooo")//ENTRA EN LOS DOS IFs
                 {
-                    if (estado != null)
-                    {
-                        estado.Estado = "Libre";
-                    }
+                    tablita.Estado = "Libre     ";                  
                 }
             }
+            //_db.Entry(tablita.Estado).State = EntityState.Modified;
             await _db.SaveChangesAsync();//update
-
             return Page();
-        }
+
+
+
+            //NO BORRAR --> PRUEBAS QUE HARÉ LUEGO
+            /*var cb = new SqlConnectionStringBuilder();
+            var Pruebita = _db.TablaPrueba;
+
+            cb.DataSource = "localhost\\CLUBPADEL";
+            using (var connection = new SqlConnection(cb.ConnectionString))
+            {
+                foreach (var item in Pruebita)
+                {
+                    if (item.Estado == estadito)
+                    {                       
+                        item.Estado = "Reservado";
+                        //_db.Entry(item.Estado).State = EntityState.Modified;//nose pa que sirve
+                    }
+                    if (item.Estado == "Reservado")
+                    {
+                        item.Estado = "Libre";
+                    }
+                }
+            }*/
+
+          }
 
         }
 }
