@@ -53,7 +53,6 @@ namespace ClubPadel.Pages
         public async Task<IActionResult> OnPostCambio(int ideito)
         {
             int idd = ideito;
-            idd += 1;
 
             var tablita = await _db.TablaPrueba.FindAsync(idd);//busca en la base de datos el registro
             if (tablita == null)//si no encuentra el registro no hace nada
@@ -62,23 +61,23 @@ namespace ClubPadel.Pages
             }
             if (tablita != null)
             {
-                if (tablita.Estado.Equals("Libre     "))//ENTRA NO SE PORQUE EL LIBRE TIENE ESPACIOS
-                {
-                    //_db.Entry(tablita.Estado="Ocupao").State = EntityState.Modified;
+                if (tablita.Estado.ToString() == "Libre     ")//NO SE PORQUE EL LIBRE TIENE ESPACIOS PERO ENTRA
+                {                 
                     tablita.Estado = "Ocupadoooo";
+                   
                 }
-                if (tablita.Estado.Equals("Ocupadoooo"))
+                if (tablita.Estado.ToString() == "Ocupadoooo")//ENTRA EN LOS DOS IFs
                 {
-                    tablita.Estado = "Libre     ";
+                    tablita.Estado = "Libre     ";                  
                 }
-
             }
+            //_db.Entry(tablita.Estado).State = EntityState.Modified;
             await _db.SaveChangesAsync();//update
             return Page();
 
 
 
-            //NO BORRAR PRUEBAS QUE HARÉ LUEGO
+            //NO BORRAR --> PRUEBAS QUE HARÉ LUEGO
             /*var cb = new SqlConnectionStringBuilder();
             var Pruebita = _db.TablaPrueba;
 
@@ -90,7 +89,7 @@ namespace ClubPadel.Pages
                     if (item.Estado == estadito)
                     {                       
                         item.Estado = "Reservado";
-                        _db.Entry(item.Estado).State = EntityState.Modified;//nose pa que sirve
+                        //_db.Entry(item.Estado).State = EntityState.Modified;//nose pa que sirve
                     }
                     if (item.Estado == "Reservado")
                     {
@@ -99,7 +98,7 @@ namespace ClubPadel.Pages
                 }
             }*/
 
-        }
+          }
 
         }
 }
