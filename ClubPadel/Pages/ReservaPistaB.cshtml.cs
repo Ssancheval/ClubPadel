@@ -16,8 +16,6 @@ namespace ClubPadel.Pages
 
         //-----------------------------------
 
-        [BindProperty]
-        public TablaMañana TablaMañana { get; set; }
 
         private readonly ILogger<ReservasPistaModel> _logger;
 
@@ -26,12 +24,7 @@ namespace ClubPadel.Pages
             _logger = logger;
             _db = db;
         }
-        public IEnumerable<TablaMañana> TablaMañanas { get; set; }
 
-        public async Task OnGet()
-        {
-            TablaMañanas = await _db.TablaMañana.ToListAsync();
-        }
 
         //si se añade el metodo onPost() es para añadir los datos a la base de datos        
         public async Task<IActionResult> OnPost(string btnreserva)
