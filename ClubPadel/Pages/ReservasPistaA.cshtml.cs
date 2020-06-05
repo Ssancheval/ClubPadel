@@ -15,9 +15,17 @@ namespace ClubPadel.Pages
     {
         private readonly ApplicationDbContext _db;
 
+        //-----------------------------------
+
         [BindProperty]
         public TablaPrueba TablaPrueba { get; set; }
+        [BindProperty]
         public Reserva Reserva { get; set; }
+        [BindProperty]
+        public Cliente Cliente { get; set; }
+
+        [TempData]
+        public string Usuario { get; set; }
 
         private readonly ILogger<ReservasPistaModel> _logger;
 
@@ -28,6 +36,7 @@ namespace ClubPadel.Pages
         }
         public IEnumerable<TablaPrueba> TablaPruebas { get; set; }
         public IEnumerable<Reserva> Reservas { get; set; }
+        public IEnumerable<Cliente> Clientes { get; set; }
 
         public async Task OnGet()
         {
@@ -42,34 +51,64 @@ namespace ClubPadel.Pages
             {
                 return Page();
             }
-            return RedirectToPage("ReservaPistaB");          
+            return RedirectToPage("ReservaPistaB");
+           
         }
 
         public async Task<IActionResult> OnPostCambio(int id)
-        {   
-            //var nombrecito = pasar el dato de la otra página
-
+        {            
             var tablita = await _db.TablaPrueba.FindAsync(id);//busca en la base de datos el registro
+            var clientes = _db.Cliente;
             if (tablita == null)//si no encuentra el registro no hace nada
             {
                 return Page();
             }
             if (tablita != null)
             {
-                if (tablita.Estado.Equals("Libre     "))
+                if (tablita.Estado.Equals("Libre     "))//NO SE PORQUE EL LIBRE TIENE ESPACIOS PERO ENTRA
                 {
                     tablita.Estado = "Ocupado   ";
-                    //tablita.Nombre = nombrecito;
+                    foreach (var item in clientes)
+                    {
+                        if (item.User.Equals(""))
+                        {
+                            tablita.Nombre = item.User;
+                        }
+                    }
                 }
-                else if (tablita.Estado.Equals("Ocupado   "))
+                else if (tablita.Estado.Equals("Ocupado   "))//ENTRA EN LOS DOS IFs
                 {
                     tablita.Estado = "Libre     ";
-                    //tablita.Nombre = "Vacio               ";
+                    tablita.Nombre = "Vacio";
                 }
             }
             _db.Entry(tablita).State = EntityState.Modified;//Modifica
             await _db.SaveChangesAsync();//Actualiza
             return RedirectToPage("ReservasPistaA");
+
+
+
+            //NO BORRAR --> PRUEBAS QUE HARÉ LUEGO
+            /*var cb = new SqlConnectionStringBuilder();
+            var Pruebita = _db.TablaPrueba;
+
+            cb.DataSource = "localhost\\CLUBPADEL";
+            using (var connection = new SqlConnection(cb.ConnectionString))
+            {
+                foreach (var item in Pruebita)
+                {
+                    if (item.Estado == estadito)
+                    {                       
+                        item.Estado = "Reservado";
+                        //_db.Entry(item.Estado).State = EntityState.Modified;//nose pa que sirve
+                    }
+                    if (item.Estado == "Reservado")
+                    {
+                        item.Estado = "Libre";
+                    }
+                }
+            }*/
+
         }
     }
 }
