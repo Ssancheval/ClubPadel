@@ -15,8 +15,6 @@ namespace ClubPadel.Pages
     {
         private readonly ApplicationDbContext _db;
 
-        //-----------------------------------
-
         [BindProperty]
         public TablaPrueba TablaPrueba { get; set; }
         public Reserva Reserva { get; set; }
@@ -44,12 +42,13 @@ namespace ClubPadel.Pages
             {
                 return Page();
             }
-            return RedirectToPage("ReservaPistaB");
-           
+            return RedirectToPage("ReservaPistaB");          
         }
 
         public async Task<IActionResult> OnPostCambio(int id)
-        {            
+        {   
+            //var nombrecito = pasar el dato de la otra página
+
             var tablita = await _db.TablaPrueba.FindAsync(id);//busca en la base de datos el registro
             if (tablita == null)//si no encuentra el registro no hace nada
             {
@@ -57,42 +56,20 @@ namespace ClubPadel.Pages
             }
             if (tablita != null)
             {
-                if (tablita.Estado.Equals("Libre     "))//NO SE PORQUE EL LIBRE TIENE ESPACIOS PERO ENTRA
+                if (tablita.Estado.Equals("Libre     "))
                 {
                     tablita.Estado = "Ocupado   ";
+                    //tablita.Nombre = nombrecito;
                 }
-                else if (tablita.Estado.Equals("Ocupado   "))//ENTRA EN LOS DOS IFs
+                else if (tablita.Estado.Equals("Ocupado   "))
                 {
                     tablita.Estado = "Libre     ";
+                    //tablita.Nombre = "Vacio               ";
                 }
             }
             _db.Entry(tablita).State = EntityState.Modified;//Modifica
             await _db.SaveChangesAsync();//Actualiza
             return RedirectToPage("ReservasPistaA");
-
-
-
-            //NO BORRAR --> PRUEBAS QUE HARÉ LUEGO
-            /*var cb = new SqlConnectionStringBuilder();
-            var Pruebita = _db.TablaPrueba;
-
-            cb.DataSource = "localhost\\CLUBPADEL";
-            using (var connection = new SqlConnection(cb.ConnectionString))
-            {
-                foreach (var item in Pruebita)
-                {
-                    if (item.Estado == estadito)
-                    {                       
-                        item.Estado = "Reservado";
-                        //_db.Entry(item.Estado).State = EntityState.Modified;//nose pa que sirve
-                    }
-                    if (item.Estado == "Reservado")
-                    {
-                        item.Estado = "Libre";
-                    }
-                }
-            }*/
-
         }
     }
 }
