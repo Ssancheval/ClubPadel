@@ -18,6 +18,9 @@ namespace ClubPadel.Pages
         [BindProperty]
         public Cliente Cliente { get; set; }
 
+        [TempData]
+        public string Usuario { get; set; }
+
         private readonly ILogger<IndexModel> _logger;
 
         public IndexModel(ILogger<IndexModel> logger, ApplicationDbContext db)
@@ -33,10 +36,11 @@ namespace ClubPadel.Pages
             Clientes = await _db.Cliente.ToListAsync();
         }
    
-        public async Task<IActionResult> OnPost(String nombreUsuario, String contraseñaUsuario)
+        public async Task<IActionResult> OnPost(string nombreUsuario, string contraseñaUsuario)
         {
             try
             {
+                Usuario = nombreUsuario;
                 var cb = new SqlConnectionStringBuilder();
                 var clientito = _db.Cliente;
 
