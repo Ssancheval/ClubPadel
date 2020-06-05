@@ -15,8 +15,6 @@ namespace ClubPadel.Pages
     {
         private readonly ApplicationDbContext _db;
 
-        //-----------------------------------
-
         [BindProperty]
         public TablaPrueba TablaPrueba { get; set; }
         [BindProperty]
@@ -51,8 +49,7 @@ namespace ClubPadel.Pages
             {
                 return Page();
             }
-            return RedirectToPage("ReservaPistaB");
-           
+            return RedirectToPage("ReservaPistaB");         
         }
 
         public async Task<IActionResult> OnPostCambio(int id)
@@ -65,7 +62,7 @@ namespace ClubPadel.Pages
             }
             if (tablita != null)
             {
-                if (tablita.Estado.Equals("Libre     "))//NO SE PORQUE EL LIBRE TIENE ESPACIOS PERO ENTRA
+                if (tablita.Estado.Equals("Libre     "))
                 {
                     tablita.Estado = "Ocupado   ";
                     foreach (var item in clientes)
@@ -76,7 +73,7 @@ namespace ClubPadel.Pages
                         }
                     }
                 }
-                else if (tablita.Estado.Equals("Ocupado   "))//ENTRA EN LOS DOS IFs
+                else if (tablita.Estado.Equals("Ocupado   "))
                 {
                     tablita.Estado = "Libre     ";
                     tablita.Nombre = "Vacio";
@@ -84,31 +81,7 @@ namespace ClubPadel.Pages
             }
             _db.Entry(tablita).State = EntityState.Modified;//Modifica
             await _db.SaveChangesAsync();//Actualiza
-            return RedirectToPage("ReservasPistaA");
-
-
-
-            //NO BORRAR --> PRUEBAS QUE HARÉ LUEGO
-            /*var cb = new SqlConnectionStringBuilder();
-            var Pruebita = _db.TablaPrueba;
-
-            cb.DataSource = "localhost\\CLUBPADEL";
-            using (var connection = new SqlConnection(cb.ConnectionString))
-            {
-                foreach (var item in Pruebita)
-                {
-                    if (item.Estado == estadito)
-                    {                       
-                        item.Estado = "Reservado";
-                        //_db.Entry(item.Estado).State = EntityState.Modified;//nose pa que sirve
-                    }
-                    if (item.Estado == "Reservado")
-                    {
-                        item.Estado = "Libre";
-                    }
-                }
-            }*/
-
+            return RedirectToPage("ReservasPistaA");//recarga la página
         }
     }
 }
