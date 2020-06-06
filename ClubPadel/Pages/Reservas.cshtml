@@ -1,7 +1,7 @@
-﻿@page "{nombre?}/{id?}"
-@model ReservasPistaModel
+﻿@page "{nombre?}/{idCli?}"
+@model ClubPadel.Pages.ReservasModel
 @{
-    ViewData["Title"] = "ReservasPistas";
+    ViewData["Title"] = "Reservas";
 }
 
 <div class="container row" id="titulo">
@@ -15,8 +15,8 @@
 <div>
     <left>
         <div>
-            @Model.Usuario  
-</div>
+            <p>INTRODUCIR EL NOMBRE DEL USUARIO!!</p>
+        </div>
         <div class="col-sm-2">
             <a asp-page="Index" style="background-color:brown; width:120px" class="btn btn-success form-control">Cerrar sesión</a>
         </div>
@@ -43,31 +43,6 @@
 </div>
 <br />
 
-@*miooo*@
-<form method="post">
-    <table class="table table-striped border">
-        <tr id="nombres" class="table-secondary">
-            <th>Id</th>
-            <th>Estado</th>
-            <th>Nombre</th>
-        </tr>
-        @foreach (var item in Model.TablaPruebas)
-        {
-            <tr>
-                <td>@Html.DisplayFor(m => item.Id)</td>
-                <td>@Html.DisplayFor(m => item.Estado)</td>
-                <td>@Html.DisplayFor(m => item.Nombre)</td>
-                <td>
-                    <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
-                </td>
-            </tr>
-        }
-    </table>
-    <br />
-    <br />
-</form>
-@*miooo*@
-
 
 @*Steven*@
 <form method="post">
@@ -84,7 +59,7 @@
                 <td>@Html.DisplayFor(m => item.Hora)</td>
                 <td>@Html.DisplayFor(m => item.Fecha)</td>
                 <td>
-                    <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@item.Id" />@*asp-page-handler="Cambio"*@
+                    <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
                 </td>
             </tr>
         }
@@ -99,27 +74,6 @@
             width: 100%;
             height: 550px;
             overflow: auto;">
-
-    @*Bucle que crea el la tabla con el horario de 9:00 a 21:00*@
-    <table class="table table-striped border">
-        <tr id="nombres" class="table-secondary">
-            <th>Hora</th>
-            <th>Estado</th>
-            <th>Reservas</th>
-        </tr>
-
-        @foreach (var item in Model.Reservas)
-        {
-            <tr id="horasHijo">
-                <td>@Html.DisplayFor(m => item.Hora)</td>
-                <td>@Html.DisplayFor(m => item.Fecha)</td>
-                <td>
-                    <a class="btn btn-success btn-sm" style="color:white">Reservar</a>
-                    <a class="btn btn-danger btn-sm invisible" style="color:white">Cancelar</a>
-                </td>
-            </tr>
-        }
-    </table>
 </div>
 <br />
 

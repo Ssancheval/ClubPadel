@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace ClubPadel.Pages
 {
@@ -22,8 +23,8 @@ namespace ClubPadel.Pages
         [BindProperty]
         public Cliente Cliente { get; set; }
 
-        [TempData]
-        public string Usuario { get; set; }
+        //[TempData]
+        //public string Usuario { get; set; }
 
         private readonly ILogger<ReservasPistaModel> _logger;
 
@@ -52,10 +53,8 @@ namespace ClubPadel.Pages
             return RedirectToPage("ReservaPistaB");         
         }
 
-        public async Task<IActionResult> OnPostCambio(int id )
-        {
-            var usu = "Ana";//da null
-
+        public async Task<IActionResult> OnPostCambio(int id, string usuario, string nombre)
+        {            
             var tablita = await _db.TablaPrueba.FindAsync(id);//busca en la base de datos el registro
             var clientes = _db.Cliente;
             if (tablita == null)//si no encuentra el registro no hace nada
@@ -67,13 +66,14 @@ namespace ClubPadel.Pages
                 if (tablita.Estado.Equals("Libre     "))
                 {
                     tablita.Estado = "Ocupado   ";
-                    foreach (var item in clientes)
-                    {
-                        if (item.User.Equals(usu))
-                        {
-                            tablita.Nombre = item.User;
-                        }
-                    }
+                    tablita.Nombre = nombre ;
+                    //foreach (var item in clientes)
+                    //{
+                    //    if (item.User.Equals(""))
+                    //    {
+                    //        tablita.Nombre = "Pepe";
+                    //    }
+                    //}
                 }
                 else if (tablita.Estado.Equals("Ocupado   "))
                 {
