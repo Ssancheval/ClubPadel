@@ -52,9 +52,9 @@ namespace ClubPadel.Pages
             return RedirectToPage("ReservaPistaB");         
         }
 
-        public async Task<IActionResult> OnPostCambio(int id, string nombreUsuario)
+        public async Task<IActionResult> OnPostCambio(int id )
         {
-            var usu = nombreUsuario;
+            var usu = "Ana";//da null
 
             var tablita = await _db.TablaPrueba.FindAsync(id);//busca en la base de datos el registro
             var clientes = _db.Cliente;
