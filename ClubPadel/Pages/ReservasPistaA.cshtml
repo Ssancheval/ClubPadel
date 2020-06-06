@@ -14,8 +14,9 @@
 <div>
     <left>
         <div>
-            <p>INTRODUCIR EL NOMBRE DEL USUARIO!!</p>
-        </div>
+            @Model.Usuario  
+            @ViewBag.nombreUsuario = @Model.Usuario;
+</div>
         <div class="col-sm-2">
             <a asp-page="Index" style="background-color:brown; width:120px" class="btn btn-success form-control">Cerrar sesión</a>
         </div>
@@ -50,7 +51,7 @@
             <th>Estado</th>
             <th>Nombre</th>
         </tr>
-        @foreach (var item in Model.TablaPruebas)//da error aquí pero ejecuta el cambio
+        @foreach (var item in Model.TablaPruebas)
         {
             <tr>
                 <td>@Html.DisplayFor(m => item.Id)</td>
@@ -76,7 +77,7 @@
             <th>Estado</th>
             <th>Nombre</th>
         </tr>
-        @foreach (var item in Model.Reservas)//da error aquí pero ejecuta el cambio
+        @foreach (var item in Model.Reservas)
         {
             <tr>
                 <td>@Html.DisplayFor(m => item.Id)</td>

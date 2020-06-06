@@ -52,8 +52,10 @@ namespace ClubPadel.Pages
             return RedirectToPage("ReservaPistaB");         
         }
 
-        public async Task<IActionResult> OnPostCambio(int id)
-        {            
+        public async Task<IActionResult> OnPostCambio(int id, string nombreUsuario)
+        {
+            var usu = nombreUsuario;
+
             var tablita = await _db.TablaPrueba.FindAsync(id);//busca en la base de datos el registro
             var clientes = _db.Cliente;
             if (tablita == null)//si no encuentra el registro no hace nada
@@ -67,7 +69,7 @@ namespace ClubPadel.Pages
                     tablita.Estado = "Ocupado   ";
                     foreach (var item in clientes)
                     {
-                        if (item.User.Equals(""))
+                        if (item.User.Equals(usu))
                         {
                             tablita.Nombre = item.User;
                         }
