@@ -52,6 +52,7 @@ namespace ClubPadel.Pages
                         {
                             if (item.User == nombreUsuario && item.Password == contraseñaUsuario)
                             {
+                                //return Redirect("ReservasPistaA/" + nombreUsuario + "/" + item.Id);
                                 return Redirect("Reservas/" + nombreUsuario + "/" + item.Id);
                             }
                         }
