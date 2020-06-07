@@ -58,14 +58,15 @@
 
         @foreach (var item in Model.Reservas)
         {
-            <tr id="horasHijo">
-                <td>@Html.DisplayFor(m => item.Hora)</td>
-                <td>@Html.DisplayFor(m => item.Fecha)</td>
-                <td>
-                    <a class="btn btn-success btn-sm" style="color:white" value="btnreserva">Reservar</a>
-                    <a class="btn btn-danger btn-sm invisible" style="color:white">Cancelar</a>
-                </td>
-            </tr>
+    <tr id="horasHijo">
+        <td>@Html.DisplayFor(m => item.Id)</td>
+        <td>@Html.DisplayFor(m => item.Hora)</td>
+        <td>@Html.DisplayFor(m => item.Fecha)</td>
+        <td>
+            <a class="btn btn-success btn-sm" style="color:white" value="btnreserva">Reservar</a>
+            <a class="btn btn-danger btn-sm invisible" style="color:white">Cancelar</a>
+        </td>
+    </tr>
         }
     </table>
 </div>
