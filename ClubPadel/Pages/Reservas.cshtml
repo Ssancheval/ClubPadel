@@ -4,6 +4,8 @@
     ViewData["Title"] = "Reservas";
 }
 
+<link rel="stylesheet" type="text/css" href="~/css/Reservas.css">
+
 <div class="container row" id="titulo">
     <div class="col-6">
         <h2 class="text-info">Reservas Pistas</h2>
@@ -51,15 +53,30 @@
             <th>Id</th>
             <th>Estado</th>
             <th>Nombre</th>
+            <th>Acción</th>
         </tr>
+        @{ string url = ViewContext.RouteData.Values["IdCli"].ToString();}
         @foreach (var item in Model.Reservas)
         {
-            <tr>
+            <tr class="text-white">
                 <td>@Html.DisplayFor(m => item.Id)</td>
                 <td>@Html.DisplayFor(m => item.Hora)</td>
                 <td>@Html.DisplayFor(m => item.Fecha)</td>
                 <td>
-                    <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                    @if (item.IdCliente == null)
+                    {
+                        @*<input class="btn btn-success" value="Reservar" onclick="document.getElementById(@item.Id).style.display='block'" />*@
+                        <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="idCliente" asp-page-handler="Cambio"/>
+                    }
+                    else if (item.IdCliente == int.Parse(url))
+                    {
+                        <input class="btn btn-danger" type="submit" value="Cancelar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                    }
+                    else
+                    {
+                        <input class="btn btn-dark disabled" type="submit" value="Ocupado" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                    }
+
                 </td>
             </tr>
         }
@@ -68,6 +85,22 @@
     <br />
 </form>
 
+<button onclick="verModelAceptar()">Open Modal</button>
+
+<div id="modelAceptar" class="modal">
+    <span onclick="cerrarModelAceptar()" class="close" title="Close Modal">×</span>
+    <form class="modal-content" action="/action_page.php">
+        <div class="container">
+            <h1>Delete Account</h1>
+            <p>Are you sure you want to delete your account?</p>
+
+            <div class="clearfix">
+                <button type="button" onclick="cerrarModelAceptar()" class="cancelbtn">Cancel</button>
+                <button type="button" onclick="cerrarModelAceptar()" class="deletebtn">Delete</button>
+            </div>
+        </div>
+    </form>
+</div>
 
 
 <div id="horas" style="padding: 4px;
@@ -83,6 +116,33 @@
 
 
 <script>
+    var idCliente = 1;
+
+    function verModelAceptar() {
+        document.getElementById('modelAceptar').style.display = 'block';
+    }
+
+    function cerrarModelAceptar() {
+        document.getElementById('modelAceptar').style.display = 'none';
+    }
+
+    function getIdCliente() {
+        return idCliente;
+    }
+
+    function setIdCliente(id) {
+        idCliente = id;
+    }
+
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 
     // Formato de la fecha actual
 
@@ -129,137 +189,7 @@
     document.getElementById("fecha").setAttribute("max", fechaLimite());
     document.getElementById("fecha").setAttribute("min", fechaActual());
 
-    // Hacer visible la alerta
-    function hacerVisible() {
-        let element = document.getElementById("alerta");
-        element.className = "alert alert-info text-center visible";
-
-        let msg = document.getElementById("mensaje");
-        msg.innerHTML = "¿Quiere reservar una pista de pádel a esta hora?";
-
-        let btn1 = document.getElementById("btnAceptar1");
-        btn1.className = "btn btn-success";
-
-        let btn2 = document.getElementById("btnCancelar1");
-        btn2.className = "btn btn-danger";
-
-        let btn3 = document.getElementById("btnAceptar2");
-        btn3.className = "btn btn-success invisible";
-
-        let btn4 = document.getElementById("btnCancelar2");
-        btn4.className = "btn btn-danger invisible";
-    }
-
-    // Hacer invisible la alerta
-    function hacerInvisible() {
-        let elmnt = document.getElementById("alerta");
-        elmnt.className = "alert alert-info text-center invisible";
-
-        let btn1 = document.getElementById("btnAceptar2");
-        btn1.className = "btn btn-success invisible";
-
-        let btn2 = document.getElementById("btnCancelar2");
-        btn2.className = "btn btn-danger invisible";
-
-        let btn3 = document.getElementById("btnAceptar3");
-        btn3.className = "btn btn-success invisible";
-
-        let btn4 = document.getElementById("btnCancelar3");
-        btn4.className = "btn btn-danger invisible";
-
-        let btn5 = document.getElementById("btnAceptar1");
-        btn5.className = "btn btn-success";
-
-        let btn6 = document.getElementById("btnCancelar1");
-        btn6.className = "btn btn-danger";
-    }
-
-    // Hacer visible la alerta de salir sin reservar
-    function cambiarSalirSinReservar() {
-        let msg = document.getElementById("mensaje");
-        msg.innerHTML = "¿Está seguro de que quiere salir sin hacer la reserva?"
-
-        let btn1 = document.getElementById("btnAceptar2");
-        btn1.className = "btn btn-success";
-
-        let btn2 = document.getElementById("btnCancelar2");
-        btn2.className = "btn btn-danger";
-
-        let btn3 = document.getElementById("btnAceptar1");
-        btn3.className = "btn btn-success invisible";
-
-        let btn4 = document.getElementById("btnCancelar1");
-        btn4.className = "btn btn-danger invisible";
-    }
-
-    // Hacer visible la alerta de cancelar reserva
-    function visibleCancelar() {
-        hacerVisible();
-
-        let msg = document.getElementById("mensaje");
-        msg.innerHTML = "¿Está seguro de que quiere cancelar su reserva?"
-
-        let btn1 = document.getElementById("btnAceptar3");
-        btn1.className = "btn btn-success";
-
-        let btn2 = document.getElementById("btnCancelar3");
-        btn2.className = "btn btn-danger";
-
-        let btn3 = document.getElementById("btnAceptar2");
-        btn3.className = "btn btn-success invisible";
-
-        let btn4 = document.getElementById("btnCancelar2");
-        btn4.className = "btn btn-danger invisible";
-
-        let btn5 = document.getElementById("btnAceptar1");
-        btn5.className = "btn btn-success invisible";
-
-        let btn6 = document.getElementById("btnCancelar1");
-        btn6.className = "btn btn-danger invisible";
-    }
-
-    // Cambio de estilo de Libre a Reservado
-    function reserva(elmnt, id, idbtn) {
-        hacerVisible();
-        let element = document.getElementById(id);
-        element.style.background = "purple";
-        element.style.color = "white";
-        element.innerHTML = "Reservado";
-        element.style.borderRadius = "0px 50px 50px 0px";
-
-        element.previousElementSibling.style.background = "purple";
-        element.previousElementSibling.style.color = "white";
-        element.previousElementSibling.style.borderRadius = "50px 0px 0px 50px";
-
-        elmnt.className = "btn btn-success btn-sm invisible";
-
-        let element2 = document.getElementById(idbtn);
-        element2.className = "btn btn-danger btn-sm";
-
-        hacerInvisible();
-    }
-
-    // Cambio de estilo de reservado a libre
-    function cancelarReserva(elmnt, id, idbtn) {
-        visibleCancelar();
-        let element = document.getElementById(id);
-        element.style.background = "white";
-        element.style.color = "black";
-        element.innerHTML = "Libre";
-        element.style.borderRadius = "50px 0px 0px 50px";
-
-        element.previousElementSibling.style.background = "white";
-        element.previousElementSibling.style.color = "black";
-        element.previousElementSibling.style.borderRadius = "0px 50px 50px 0px";
-
-        elmnt.className = "btn btn-success btn-sm invisible";
-
-        let element2 = document.getElementById(idbtn);
-        element2.className = "btn btn-success btn-sm visible";
-
-        hacerInvisible();
-    }
-
+    // ------------------------------------------------------------------------------
     function buscarHoras() {
         let valor = document.getElementById("fecha").value;
         let msValor = Date.parse(valor);

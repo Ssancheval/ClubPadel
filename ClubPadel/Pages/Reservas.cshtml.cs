@@ -21,6 +21,8 @@ namespace ClubPadel.Pages
         [BindProperty]
         public Cliente Cliente { get; set; }
 
+        public int idCliente { get; set; }
+
         private readonly ILogger<ReservasModel> _logger;
 
         public ReservasModel(ILogger<ReservasModel> logger, ApplicationDbContext db)
@@ -31,9 +33,10 @@ namespace ClubPadel.Pages
         public IEnumerable<Reserva> Reservas { get; set; }
         public IEnumerable<Cliente> Clientes { get; set; }
 
-        public async Task OnGet()
+        public async Task OnGet(int idCli)
         {
             Reservas = await _db.Reserva.ToListAsync();
+            idCliente = idCli;
         }
 
         public async Task<IActionResult> OnPost()
