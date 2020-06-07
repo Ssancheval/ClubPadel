@@ -51,7 +51,6 @@ namespace ClubPadel.Pages
         public async Task<IActionResult> OnPostCambio(int id, string usuario, string nombre, int idCli)
         {
             var tablita = await _db.Reserva.FindAsync(id);//busca en la base de datos el registro
-            var clientes = _db.Cliente;
             if (tablita == null)//si no encuentra el registro no hace nada
             {
                 return Page();
