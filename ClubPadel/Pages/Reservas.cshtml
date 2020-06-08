@@ -65,35 +65,35 @@
 <form method="post">
     <table class="table table-striped border">
         <tr id="nombres" class="table-secondary">
-            <th>Id</th>
             <th>Hora</th>
             <th>Fecha</th>
+            @*<th>Estado</th>*@
             <th>Acción</th>
         </tr>
         @foreach (var item in Model.Reservas)
         {
             @if (item.Fecha == fecha)
             {
-                <tr class="text-white">
-                    <td>@Html.DisplayFor(m => item.Id)</td>
-                    <td>@Html.DisplayFor(m => item.Hora)</td>
-                    <td>@Html.DisplayFor(m => item.Fecha)</td>
-                    <td>
-                        @if (item.IdCliente == null)
-                        {
-                            <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
-                        }
-                        else if (item.IdCliente == int.Parse(urlId))
-                        {
-                            <input class="btn btn-danger" type="submit" value="Cancelar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
-                        }
-                        else
-                        {
-                            <input class="btn btn-dark disabled" type="submit" value="Ocupado" asp-route-id="@item.Id" asp-page-handler="Cambio" />
-                        }
+    <tr class="text-white">
+        <td>@Html.DisplayFor(m => item.Hora)</td>
+        <td>@Html.DisplayFor(m => item.Fecha)</td>
+        @* <td>@Html.DisplayFor(m => item.Id)</td>meter aqqui el estado*@
+        <td>
+            @if (item.IdCliente == null)
+            {
+                <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+            }
+            else if (item.IdCliente == int.Parse(urlId))
+            {
+                <input class="btn btn-danger" type="submit" value="Cancelar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+            }
+            else
+            {
+                <input class="btn btn-dark disabled" type="submit" value="Ocupado" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+            }
 
-                    </td>
-                </tr>
+        </td>
+    </tr>
             }
 
         }

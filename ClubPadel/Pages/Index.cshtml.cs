@@ -61,7 +61,7 @@ namespace ClubPadel.Pages
             {
                 Console.WriteLine(e.ToString());
             }
-            return RedirectToPage("Index");//recarga la página
+            return Page();//recarga la página
         }
     }
 }

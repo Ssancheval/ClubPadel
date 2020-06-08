@@ -15,6 +15,8 @@ namespace ClubPadel.Models
         public int Pista { get; set; }
         [Required]
         public string Hora { get; set; }
+      //  [Required]
+       // public string Estado { get; set; }
         public int? IdCliente { get; set; }
     }
 }
