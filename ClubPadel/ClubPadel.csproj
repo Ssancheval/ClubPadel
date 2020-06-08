@@ -18,6 +18,10 @@
     <Compile Remove="Migrations\20200529100026_Relaciones4.Designer.cs" />
     <Compile Remove="Migrations\20200604145552_AgregarTabalaReserva.cs" />
     <Compile Remove="Migrations\20200604145552_AgregarTabalaReserva.Designer.cs" />
+    <Compile Remove="Migrations\20200604145645_AgregarTablaReserva.cs" />
+    <Compile Remove="Migrations\20200604145645_AgregarTablaReserva.Designer.cs" />
+    <Compile Remove="Migrations\20200608092959_BD.cs" />
+    <Compile Remove="Migrations\20200608092959_BD.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
