@@ -18,11 +18,16 @@
     <Compile Remove="Migrations\20200529100026_Relaciones4.Designer.cs" />
     <Compile Remove="Migrations\20200604145552_AgregarTabalaReserva.cs" />
     <Compile Remove="Migrations\20200604145552_AgregarTabalaReserva.Designer.cs" />
+    <Compile Remove="Migrations\20200604145645_AgregarTablaReserva.cs" />
+    <Compile Remove="Migrations\20200604145645_AgregarTablaReserva.Designer.cs" />
+    <Compile Remove="Migrations\20200608092959_BD.cs" />
+    <Compile Remove="Migrations\20200608092959_BD.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4">
@@ -30,6 +35,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+    <PackageReference Include="MyTested.AspNetCore.Mvc.Controllers" Version="3.1.2" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="4.7.0" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using ClubPadel.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +17,8 @@ namespace ClubPadel.Pages
         [BindProperty]
         public Cliente Cliente { get; set; }
 
-        [TempData]
-        public string Usuario { get; set; }
+        //[TempData]
+        //public string Usuario { get; set; }
 
         private readonly ILogger<IndexModel> _logger;
 
@@ -40,7 +39,6 @@ namespace ClubPadel.Pages
         {
             try
             {
-                Usuario = nombreUsuario;
                 var cb = new SqlConnectionStringBuilder();
                 var clientito = _db.Cliente;
 
@@ -53,7 +51,7 @@ namespace ClubPadel.Pages
                         {
                             if (item.User == nombreUsuario && item.Password == contraseñaUsuario)
                             {
-                                return RedirectToPage("ReservasPistaA");
+                                return Redirect("Reservas/" + nombreUsuario + "/" + item.Id + "/hoy");
                             }
                         }
                     }
@@ -63,7 +61,7 @@ namespace ClubPadel.Pages
             {
                 Console.WriteLine(e.ToString());
             }
-            return Page();
+            return RedirectToPage("Index");//recarga la página
         }
     }
 }

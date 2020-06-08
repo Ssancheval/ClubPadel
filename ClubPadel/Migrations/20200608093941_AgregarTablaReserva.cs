@@ -25,7 +25,7 @@ namespace ClubPadel.Migrations
                     Fecha = table.Column<string>(nullable: false),
                     Pista = table.Column<int>(nullable: false),
                     Hora = table.Column<string>(nullable: false),
-                    IdCliente = table.Column<int>(nullable: false)
+                    IdCliente = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {

@@ -1,0 +1,148 @@
+﻿@page "{nombre?}/{idCli?}/{fecha?}"
+@model ClubPadel.Pages.ReservasModel
+@{
+    ViewData["Title"] = "Reservas";
+    string urlId = ViewContext.RouteData.Values["IdCli"].ToString();
+    string urlNombre = ViewContext.RouteData.Values["nombre"].ToString();
+    string urlFecha = ViewContext.RouteData.Values["fecha"].ToString();
+
+    var fechaHoy = DateTime.Now;
+    var fechaMañana = fechaHoy.AddDays(1);
+    var minFecha = fechaHoy.ToString("yyyy-MM-dd");
+    var maxFecha = fechaMañana.ToString("yyyy-MM-dd");
+    var fecha = "";
+}
+
+<div>
+    <div id="titulo" align="center">
+            <h1 class="text-info">Reservas Pistas</h1>
+    </div>
+    <div align="left">
+            <p name="usuario">@urlNombre</p>
+            <a asp-page="Index" style="background-color:brown; width:120px" class="btn btn-success form-control">Cerrar sesión</a>
+    </div>
+    
+</div>
+<br />
+<center>
+@{
+    if (urlFecha == "hoy")
+    {
+        fecha = fechaHoy.ToString("yyyy-MM-dd");
+        <div class="4" id="fechaPadre">
+            <input id="fecha" type="date" value="@minFecha"
+                   min="@minFecha"
+                   max="@maxFecha" />
+            <a href="/Reservas/@urlNombre/@urlId/mañana" style="width:200px" class="btn btn-success form-control">Buscar horas mañana</a>
+        </div>
+    }
+    else
+    {
+        fecha = fechaMañana.ToString("yyyy-MM-dd");
+        <div class="4" id="fechaPadre">
+            <input id="fecha" type="date" value="@maxFecha"
+                   min="@minFecha"
+                   max="@maxFecha" />
+            <a href="/Reservas/@urlNombre/@urlId/hoy" style="width:200px" class="btn btn-success form-control">Buscar horas hoy</a>
+        </div>
+    }
+}
+</center>
+
+<div class="row text-center" id="cuadroTexto">
+    <div class="alert alert-info text-center invisible" style="width: 100%" id="alerta">
+        <p id="mensaje"></p>
+        <a class="btn btn-success" id="btnAceptar1">Aceptar</a>
+        <a class="btn btn-success invisible" id="btnAceptar2" onclick="hacerInvisible()">Aceptar</a>
+        <a class="btn btn-success invisible" id="btnAceptar3">Aceptar</a>
+        <a class="btn btn-danger invisible" id="btnCancelar3" onclick="hacerInvisible()">Cancelar</a>
+        <a class="btn btn-danger invisible" id="btnCancelar2" onclick="hacerVisible()">Cancelar</a>
+        <a class="btn btn-danger" id="btnCancelar1" onclick="cambiarSalirSinReservar()">Cancelar</a>
+    </div>
+</div>
+<br />
+
+<form method="post">
+    <table class="table table-striped border">
+        <tr id="nombres" class="table-secondary">
+            <th>Id</th>
+            <th>Hora</th>
+            <th>Fecha</th>
+            <th>Acción</th>
+        </tr>
+        @foreach (var item in Model.Reservas)
+        {
+            @if (item.Fecha == fecha)
+            {
+                <tr class="text-white">
+                    <td>@Html.DisplayFor(m => item.Id)</td>
+                    <td>@Html.DisplayFor(m => item.Hora)</td>
+                    <td>@Html.DisplayFor(m => item.Fecha)</td>
+                    <td>
+                        @if (item.IdCliente == null)
+                        {
+                            <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                        }
+                        else if (item.IdCliente == int.Parse(urlId))
+                        {
+                            <input class="btn btn-danger" type="submit" value="Cancelar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                        }
+                        else
+                        {
+                            <input class="btn btn-dark disabled" type="submit" value="Ocupado" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                        }
+
+                    </td>
+                </tr>
+            }
+
+        }
+    </table>
+    <br />
+    <br />
+</form>
+
+
+<div id="horas" style="padding: 4px;
+            width: 100%;
+            height: 550px;
+            overflow: auto;">
+</div>
+<br />
+
+<script>
+    //function buscarHoras() {
+    //    let valor = document.getElementById("fecha").value;
+    //    let msValor = Date.parse(valor);
+    //    let fechaValor = new Date(msValor);
+
+    //    let ms1 = Date.parse(fechaActual());
+    //    let fecha1 = new Date(ms1);
+
+    //    if (fechaValor.getTime() == fecha1.getTime()) {
+    //        location.href = "/ReservasPistaA";
+    //    } else {
+    //        location.href = "/ReservaPistaB";
+    //    }
+    //}
+
+    function buscarHoras() {
+        let valor = document.getElementById("fecha").value;
+        if (valor == @maxFecha) {
+            location.href = "/Reservas/" + @urlNombre + "/" + @urlId + "/mañana";
+        } else {
+            location.href = "/Reservas/" + @urlNombre + "/" + @urlId + "/hoy";
+        }
+        //let msValor = Date.parse(valor);
+        //let fechaValor = new Date(msValor);
+
+        //let ms1 = Date.parse(fechaActual());
+        //let fecha1 = new Date(ms1);
+
+        //if (fechaValor.getTime() == fecha1.getTime()) {
+        //    location.href = "/ReservasPistaA";
+        //} else {
+        //    location.href = "/ReservaPistaB";
+        //}
+    }
+</script>
