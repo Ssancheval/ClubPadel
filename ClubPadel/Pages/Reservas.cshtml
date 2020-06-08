@@ -13,22 +13,18 @@
     var fecha = "";
 }
 
-<div class="container row text-white" id="titulo">
-    <div class="col-6">
-        <h2 class="text-info">Reservas Pistas</h2>
-        <h2 name="usuario">@urlNombre</h2>
-    </div>
-    <br />
-</div>
-<br />
 <div>
-    <left>
-        <div class="col-sm-2">
+    <div id="titulo" align="center">
+            <h1 class="text-info">Reservas Pistas</h1>
+    </div>
+    <div align="left">
+            <p name="usuario">@urlNombre</p>
             <a asp-page="Index" style="background-color:brown; width:120px" class="btn btn-success form-control">Cerrar sesión</a>
-        </div>
-    </left>
+    </div>
+    
 </div>
-<br />
+<br /><br />
+
 
 @{
     if (urlFecha == "hoy")
@@ -68,13 +64,12 @@
 <br />
 
 
-@*Steven*@
 <form method="post">
     <table class="table table-striped border">
         <tr id="nombres" class="table-secondary">
             <th>Id</th>
-            <th>Estado</th>
-            <th>Nombre</th>
+            <th>Hora</th>
+            <th>Fecha</th>
             <th>Acción</th>
         </tr>
         @foreach (var item in Model.Reservas)
