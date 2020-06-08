@@ -8,23 +8,23 @@
     var formatFecha = fechaHoy.ToString("yyyy-MM-dd");
 }
 
-<div class="container row text-white" id="titulo">
-    <div class="col-6">
-        <h2 class="text-info">Reservas Pistas</h2>
-        <h2 name="usuario">@urlNombre</h2>
-        <h2 name="usuario">@formatFecha</h2>
-    </div>
-    <br />
-</div>
-<br />
-<div>
-    <left>
-        <div class="col-sm-2">
-            <a asp-page="Index" style="background-color:brown; width:120px" class="btn btn-success form-control">Cerrar sesión</a>
-        </div>
-    </left>
-</div>
-<br />
+    <table>
+        <tr>
+            <td>
+                <left> <p name="usuario">@urlNombre</p> </left>
+            </td>
+            <td id="titulo">
+                <center> <h1 class="text-info">Reservas Pistas</h1> </center>
+            </td>
+        </tr>
+       <tr>
+           <td>
+               <left> <a asp-page="Index" style="background-color:brown; width:120px" class="btn btn-success form-control">Cerrar sesión</a> </left>
+           </td>
+       </tr>
+    </table>
+
+    <br /><br /><br />
 <div class="4" id="fechaPadre">
     <input id="fecha" type="date"
            min="0-0-0"
@@ -51,8 +51,8 @@
     <table class="table table-striped border">
         <tr id="nombres" class="table-secondary">
             <th>Id</th>
-            <th>Estado</th>
-            <th>Nombre</th>
+            <th>Hora</th>
+            <th>Fecha</th>
             <th>Acción</th>
         </tr>
         @foreach (var item in Model.Reservas)
