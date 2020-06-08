@@ -23,6 +23,8 @@ namespace ClubPadel.Pages
         public Reserva Reserva { get; set; }
         [BindProperty]
         public Cliente Cliente { get; set; }
+        [BindProperty]
+        public string Name { get; set; }
 
         [TempData]
         public string Usuario { get; set; }
@@ -45,7 +47,7 @@ namespace ClubPadel.Pages
         }
 
         //si se añade el metodo onPost() es para añadir los datos a la base de datos        
-        public async Task<IActionResult> OnPost()
+        /*public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
             {
@@ -53,10 +55,10 @@ namespace ClubPadel.Pages
             }
             return RedirectToPage("ReservaPistaB");
            
-        }
+        }*/
 
         public async Task<IActionResult> OnPostCambio(int id)
-        {            
+        {
             var tablita = await _db.TablaPrueba.FindAsync(id);//busca en la base de datos el registro
             var clientes = _db.Cliente;
             if (tablita == null)//si no encuentra el registro no hace nada
