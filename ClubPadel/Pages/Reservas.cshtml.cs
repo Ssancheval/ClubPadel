@@ -70,5 +70,10 @@ namespace ClubPadel.Pages
             await _db.SaveChangesAsync();//Actualiza
             return RedirectToPage("Reservas");//recarga la página
         }
+
+        public async Task<IActionResult> OnPostRecargar(string nombre, int idCli, string fecha)
+        {
+            return Redirect("Reservas/" + nombre + "/" + idCli + "/" + fecha);
+        }
     }
 }
