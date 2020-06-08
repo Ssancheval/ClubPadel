@@ -1,18 +1,22 @@
-﻿@page "{nombre?}/{idCli?}"
+﻿@page "{nombre?}/{idCli?}/{fecha?}"
 @model ClubPadel.Pages.ReservasModel
 @{
     ViewData["Title"] = "Reservas";
     string urlId = ViewContext.RouteData.Values["IdCli"].ToString();
     string urlNombre = ViewContext.RouteData.Values["nombre"].ToString();
+    string urlFecha = ViewContext.RouteData.Values["fecha"].ToString();
+
     var fechaHoy = DateTime.Now;
-    var formatFecha = fechaHoy.ToString("yyyy-MM-dd");
+    var fechaMañana = fechaHoy.AddDays(1);
+    var minFecha = fechaHoy.ToString("yyyy-MM-dd");
+    var maxFecha = fechaMañana.ToString("yyyy-MM-dd");
+    var fecha = "";
 }
 
 <div class="container row text-white" id="titulo">
     <div class="col-6">
         <h2 class="text-info">Reservas Pistas</h2>
         <h2 name="usuario">@urlNombre</h2>
-        <h2 name="usuario">@formatFecha</h2>
     </div>
     <br />
 </div>
@@ -25,12 +29,30 @@
     </left>
 </div>
 <br />
-<div class="4" id="fechaPadre">
-    <input id="fecha" type="date"
-           min="0-0-0"
-           max="0-0-0" />
-    <input id="button" type="button" onclick="buscarHoras()" value="Buscar Horas" />
-</div>
+
+@{
+    if (urlFecha == "hoy")
+    {
+        fecha = fechaHoy.ToString("yyyy-MM-dd");
+        <div class="4" id="fechaPadre">
+            <input id="fecha" type="date" value="@minFecha"
+                   min="@minFecha"
+                   max="@maxFecha" />
+            <a href="/Reservas/@urlNombre/@urlId/mañana" style="width:200px" class="btn btn-success form-control">Buscar horas mañana</a>
+        </div>
+    }
+    else
+    {
+        fecha = fechaMañana.ToString("yyyy-MM-dd");
+        <div class="4" id="fechaPadre">
+            <input id="fecha" type="date" value="@maxFecha"
+                   min="@minFecha"
+                   max="@maxFecha" />
+            <a href="/Reservas/@urlNombre/@urlId/hoy" style="width:200px" class="btn btn-success form-control">Buscar horas hoy</a>
+        </div>
+    }
+}
+
 <br />
 <div class="row text-center" id="cuadroTexto">
     <div class="alert alert-info text-center invisible" style="width: 100%" id="alerta">
@@ -57,26 +79,30 @@
         </tr>
         @foreach (var item in Model.Reservas)
         {
-            <tr class="text-white">
-                <td>@Html.DisplayFor(m => item.Id)</td>
-                <td>@Html.DisplayFor(m => item.Hora)</td>
-                <td>@Html.DisplayFor(m => item.Fecha)</td>
-                <td>
-                    @if (item.IdCliente == null)
-                    {
-                        <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
-                    }
-                    else if (item.IdCliente == int.Parse(urlId))
-                    {
-                        <input class="btn btn-danger" type="submit" value="Cancelar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
-                    }
-                    else
-                    {
-                        <input class="btn btn-dark disabled" type="submit" value="Ocupado" asp-route-id="@item.Id" asp-page-handler="Cambio" />
-                    }
+            @if (item.Fecha == fecha)
+            {
+                <tr class="text-white">
+                    <td>@Html.DisplayFor(m => item.Id)</td>
+                    <td>@Html.DisplayFor(m => item.Hora)</td>
+                    <td>@Html.DisplayFor(m => item.Fecha)</td>
+                    <td>
+                        @if (item.IdCliente == null)
+                        {
+                            <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                        }
+                        else if (item.IdCliente == int.Parse(urlId))
+                        {
+                            <input class="btn btn-danger" type="submit" value="Cancelar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                        }
+                        else
+                        {
+                            <input class="btn btn-dark disabled" type="submit" value="Ocupado" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                        }
 
-                </td>
-            </tr>
+                    </td>
+                </tr>
+            }
+
         }
     </table>
     <br />
@@ -92,65 +118,38 @@
 <br />
 
 <script>
+    //function buscarHoras() {
+    //    let valor = document.getElementById("fecha").value;
+    //    let msValor = Date.parse(valor);
+    //    let fechaValor = new Date(msValor);
 
-    // Formato de la fecha actual
+    //    let ms1 = Date.parse(fechaActual());
+    //    let fecha1 = new Date(ms1);
 
-    function fechaActual() {
-        let date = new Date();
-        let year = date.getFullYear().toString();
-        let day = date.getDate().toString();
-        let month = date.getMonth() + 1;
-        if (month < 9) {
-            if (day < 9) {
-                return year + "-0" + month.toString() + "-0" + day;
-            } else {
-                return year + "-0" + month.toString() + "-" + day;
-            }
-        } else {
-            if (day < 9) {
-                return year + "-" + month.toString() + "-0" + day;
-            } else {
-                return year + "-" + month.toString() + "-" + day;
-            }
-        }
-    }
-    document.getElementById("fecha").value = fechaActual();
+    //    if (fechaValor.getTime() == fecha1.getTime()) {
+    //        location.href = "/ReservasPistaA";
+    //    } else {
+    //        location.href = "/ReservaPistaB";
+    //    }
+    //}
 
-    function fechaLimite() {
-        var date = new Date();
-        var day = date.getDate() + 1;
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear().toString();
-        if (month < 9) {
-            if (day < 9) {
-                return year + "-0" + month.toString() + "-0" + day;
-            } else {
-                return year + "-0" + month.toString() + "-" + day;
-            }
-        } else {
-            if (day < 9) {
-                return year + "-" + month.toString() + "-0" + day;
-            } else {
-                return year + "-" + month.toString() + "-" + day;
-            }
-        }
-    }
-    document.getElementById("fecha").setAttribute("max", '2020-06-10');
-    document.getElementById("fecha").setAttribute("min", fechaActual());
-
-    // ------------------------------------------------------------------------------
     function buscarHoras() {
         let valor = document.getElementById("fecha").value;
-        let msValor = Date.parse(valor);
-        let fechaValor = new Date(msValor);
-
-        let ms1 = Date.parse(fechaActual());
-        let fecha1 = new Date(ms1);
-
-        if (fechaValor.getTime() == fecha1.getTime()) {
-            location.href = "/ReservasPistaA";
+        if (valor == @maxFecha) {
+            location.href = "/Reservas/" + @urlNombre + "/" + @urlId + "/mañana";
         } else {
-            location.href = "/ReservaPistaB";
+            location.href = "/Reservas/" + @urlNombre + "/" + @urlId + "/hoy";
         }
+        //let msValor = Date.parse(valor);
+        //let fechaValor = new Date(msValor);
+
+        //let ms1 = Date.parse(fechaActual());
+        //let fecha1 = new Date(ms1);
+
+        //if (fechaValor.getTime() == fecha1.getTime()) {
+        //    location.href = "/ReservasPistaA";
+        //} else {
+        //    location.href = "/ReservaPistaB";
+        //}
     }
 </script>
