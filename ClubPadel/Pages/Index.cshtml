@@ -45,28 +45,7 @@
                         <input type="submit" value="Inicio" asp-for="Cliente.User" class="btn btn-success form-control" />
                     </div>
                 </div>
-                <br />
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            @*Este boton es temporal, cuando se añada la pantalla de inicio de sesiom se podra quitar*@
-                            <a class="btn btn-dark form-control col-sm-12" asp-page="ReservasPistaA">Reservas</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </form>
     </div>
 </div>
-@*
-    Pequeña prueba que muestra los datos de la tablas
-        si quieres ver los datos ve al explorador de servidores y busca la base de datos
-        sino esto va a dar error
-        <div>
-            @foreach (var item in Model.Clientes)
-            {
-                <p>@Html.DisplayFor(m => item.User)</p>
-                <p>@Html.DisplayFor(m => item.Password)</p>
-            }
-        </div>
-*@

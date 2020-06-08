@@ -39,7 +39,6 @@ namespace ClubPadel.Pages
         {
             try
             {
-                //Usuario = nombreUsuario;
                 var cb = new SqlConnectionStringBuilder();
                 var clientito = _db.Cliente;
 
@@ -52,7 +51,6 @@ namespace ClubPadel.Pages
                         {
                             if (item.User == nombreUsuario && item.Password == contraseñaUsuario)
                             {
-                                //return Redirect("ReservasPistaA/" + nombreUsuario + "/" + item.Id);
                                 return Redirect("Reservas/" + nombreUsuario + "/" + item.Id + "/hoy");
                             }
                         }

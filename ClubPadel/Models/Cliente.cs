@@ -12,7 +12,7 @@ namespace ClubPadel.Models
         public int Id { get; set; }
         [Required]
         public string User { get; set; }
-        [Required (ErrorMessage ="Datos incorrectos, introduzca bien los datos")]
+        [Required (ErrorMessage ="Los datos introducidos son incorrectos. Por favor intentelo de nuevo")]
         public string Password { get; set; }
     }
 }
