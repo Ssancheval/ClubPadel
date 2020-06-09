@@ -21,7 +21,7 @@ namespace ClubPadel.Pages
         [BindProperty]
         public Cliente Cliente { get; set; }
 
-        public int idCliente { get; set; }
+        public int prueba { get; set; }
 
         private readonly ILogger<ReservasModel> _logger;
 
@@ -36,7 +36,17 @@ namespace ClubPadel.Pages
         public async Task OnGet(int idCli)
         {
             Reservas = await _db.Reserva.ToListAsync();
-            idCliente = idCli;
+
+            var fechaHoy = DateTime.Now;
+            var fechaMañana = fechaHoy.AddDays(1);
+            var maxFecha = fechaMañana.ToString("yyyy-MM-dd");
+
+            var fecha = from m in _db.Reserva select m;
+            prueba = fecha.Where(s => s.Fecha.Contains(maxFecha)).Count();
+            if (prueba == 0)
+            {
+                _db.Database.ExecuteSqlRaw("execute InsertarRegistros");
+            }
         }
 
         public async Task<IActionResult> OnPostCambio(int id, int idCli)

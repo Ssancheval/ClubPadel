@@ -13,18 +13,24 @@
     var fecha = "";
 }
 
-<div>
-    <div id="titulo" align="center">
-            <h1 class="text-info">Reservas Pistas</h1>
+<div class="container row text-white" id="titulo">
+    <div class="col-6">
+        <h2 class="text-info">Reservas Pistas</h2>
+        <h2 name="usuario">@urlNombre</h2>
+        <h2 name="usuario">@Model.prueba</h2>
     </div>
-    <div align="left">
-            <p name="usuario">@urlNombre</p>
-            <a asp-page="Index" style="background-color:brown; width:120px" class="btn btn-success form-control">Cerrar sesión</a>
-    </div>
-    
+    <br />
 </div>
 <br />
-<center>
+<div>
+    <left>
+        <div class="col-sm-2">
+            <a asp-page="Index" style="background-color:brown; width:120px" class="btn btn-success form-control">Cerrar sesión</a>
+        </div>
+    </left>
+</div>
+<br />
+
 @{
     if (urlFecha == "hoy")
     {
@@ -47,8 +53,8 @@
         </div>
     }
 }
-</center>
 
+<br />
 <div class="row text-center" id="cuadroTexto">
     <div class="alert alert-info text-center invisible" style="width: 100%" id="alerta">
         <p id="mensaje"></p>
@@ -62,38 +68,40 @@
 </div>
 <br />
 
+
+@*Steven*@
 <form method="post">
     <table class="table table-striped border">
         <tr id="nombres" class="table-secondary">
-            <th>Hora</th>
-            <th>Fecha</th>
-            @*<th>Estado</th>*@
+            <th>Id</th>
+            <th>Estado</th>
+            <th>Nombre</th>
             <th>Acción</th>
         </tr>
         @foreach (var item in Model.Reservas)
         {
             @if (item.Fecha == fecha)
             {
-    <tr class="text-white">
-        <td>@Html.DisplayFor(m => item.Hora)</td>
-        <td>@Html.DisplayFor(m => item.Fecha)</td>
-        @* <td>@Html.DisplayFor(m => item.Id)</td>meter aqqui el estado*@
-        <td>
-            @if (item.IdCliente == null)
-            {
-                <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
-            }
-            else if (item.IdCliente == int.Parse(urlId))
-            {
-                <input class="btn btn-danger" type="submit" value="Cancelar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
-            }
-            else
-            {
-                <input class="btn btn-dark disabled" type="submit" value="Ocupado" asp-route-id="@item.Id" asp-page-handler="Cambio" />
-            }
+                <tr class="text-white">
+                    <td>@Html.DisplayFor(m => item.Id)</td>
+                    <td>@Html.DisplayFor(m => item.Hora)</td>
+                    <td>@Html.DisplayFor(m => item.Fecha)</td>
+                    <td>
+                        @if (item.IdCliente == null)
+                        {
+                            <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                        }
+                        else if (item.IdCliente == int.Parse(urlId))
+                        {
+                            <input class="btn btn-danger" type="submit" value="Cancelar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                        }
+                        else
+                        {
+                            <input class="btn btn-dark disabled" type="submit" value="Ocupado" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                        }
 
-        </td>
-    </tr>
+                    </td>
+                </tr>
             }
 
         }
