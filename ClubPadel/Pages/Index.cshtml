@@ -7,43 +7,32 @@
 <link rel="stylesheet" type="text/css" href="~/css/index.css">
 
 <div class="text-center">
-    <img src="~/image/padel.png" style="width:200px;height:200px" id="logo" />
+    <img src="~/image/padel.png" class="logo" />
 </div>
-<div id="divPadre">
-    <div class="text-light text-center" id="divHijo">
-        <br />
-        <h3 class="text-light">Inicio Sesión</h3>
-        <form method="post">
+<div class="box-padre">
+    <div class="text-light text-left box-hijo">
+        <h3 class="text-light">Iniciar sesión</h3>
+        <form method="post" class="box-datos">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="container" style="padding:30px;">
+            <div style="padding:30px;">
                 <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label asp-for="Cliente.User"></label>
-                        </div>
-                        <div class="col-sm-4">
-                            <input name="nombreUsuario" asp-for="Cliente.User" class="form-control" id="usuario" />
-                        </div>
+                    <div>
+                        <p class="box-datos">Usuario</p>
+                        <input name="nombreUsuario" asp-for="Cliente.User" class="form-control box-datos" id="usuario" />
                         <span asp-validation-for="Cliente.User" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label asp-for="Cliente.Password"></label>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="password" name="contraseñaUsuario" asp-for="Cliente.Password" class="form-control" id="contrasena" />
-                        </div>
+                    <div>
+                        <p class="box-datos">Contraseña</p>
+                        <input type="password" name="contraseñaUsuario" asp-for="Cliente.Password" class="form-control" id="contrasena" />
                         <span asp-validation-for="Cliente.Password" class="text-danger"></span>
                     </div>
                 </div>
 
-                <div align="center">
-                    <div class="col-sm-2">
-                        <input type="submit" value="Inicio" asp-for="Cliente.User" class="btn btn-success form-control" />
-                    </div>
+                <div class="form-group box-datos">
+                    <input type="submit" value="Iniciar sesión" asp-for="Cliente.User" class="btn btn-success form-control" />
                 </div>
             </div>
         </form>
