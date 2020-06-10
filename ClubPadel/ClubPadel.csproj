@@ -22,6 +22,8 @@
     <Compile Remove="Migrations\20200604145645_AgregarTablaReserva.Designer.cs" />
     <Compile Remove="Migrations\20200608092959_BD.cs" />
     <Compile Remove="Migrations\20200608092959_BD.Designer.cs" />
+    <Compile Remove="Migrations\20200608093941_AgregarTablaReserva.cs" />
+    <Compile Remove="Migrations\20200608093941_AgregarTablaReserva.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
