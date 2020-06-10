@@ -11,13 +11,13 @@
     var minFecha = fechaHoy.ToString("yyyy-MM-dd");
     var maxFecha = fechaMañana.ToString("yyyy-MM-dd");
     var fecha = "";
+    var numPista = 1;
 }
 
 <div class="container row text-white" id="titulo">
     <div class="col-6">
         <h2 class="text-info">Reservas Pistas</h2>
         <h2 name="usuario">@urlNombre</h2>
-        <h2 name="usuario">@Model.prueba</h2>
     </div>
     <br />
 </div>
@@ -74,8 +74,8 @@
     <table class="table table-striped border">
         <tr id="nombres" class="table-secondary">
             <th>Id</th>
-            <th>Estado</th>
-            <th>Nombre</th>
+            <th>Hora</th>
+            <th>Fecha</th>
             <th>Acción</th>
         </tr>
         @foreach (var item in Model.Reservas)

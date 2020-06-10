@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClubPadel.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200608093941_AgregarTablaReserva")]
+    [Migration("20200610094151_AgregarTablaReserva")]
     partial class AgregarTablaReserva
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
