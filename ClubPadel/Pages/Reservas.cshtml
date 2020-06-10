@@ -13,48 +13,43 @@
     var fecha = "";
 }
 
-<div class="container row text-white" id="titulo">
-    <div class="col-6">
-        <h2 class="text-info">Reservas Pistas</h2>
-        <h2 name="usuario">@urlNombre</h2>
-        <h2 name="usuario">@Model.prueba</h2>
-    </div>
-    <br />
-</div>
 <br />
-<div>
-    <left>
-        <div class="col-sm-2">
-            <a asp-page="Index" style="background-color:brown; width:120px" class="btn btn-success form-control">Cerrar sesión</a>
-        </div>
-    </left>
+<h1 align="center" class="text-info" id="titulo">Reservas Pistas</h1>
+<br />
+<div class="col-6">
+    <div class="col-sm-2">
+    <h5 name="usuario">@urlNombre</h5>
+    <a asp-page="Index" style="background-color:brown; width:120px" class="btn btn-success form-control">Cerrar sesión</a>
+</div>
 </div>
 <br />
 
-@{
-    if (urlFecha == "hoy")
-    {
-        fecha = fechaHoy.ToString("yyyy-MM-dd");
-        <div class="4" id="fechaPadre">
-            <input id="fecha" type="date" value="@minFecha"
-                   min="@minFecha"
-                   max="@maxFecha" />
-            <a href="/Reservas/@urlNombre/@urlId/mañana" style="width:200px" class="btn btn-success form-control">Buscar horas mañana</a>
-        </div>
+<center>
+    @{
+        if (urlFecha == "hoy")
+        {
+            fecha = fechaHoy.ToString("yyyy-MM-dd");
+            <div class="4" id="fechaPadre">
+                <input id="fecha" type="date" value="@minFecha"
+                       min="@minFecha"
+                       max="@maxFecha" />
+                <a href="/Reservas/@urlNombre/@urlId/mañana" style="width:200px" class="btn btn-success form-control">Buscar horas mañana</a>
+            </div>
+        }
+        else
+        {
+            fecha = fechaMañana.ToString("yyyy-MM-dd");
+            <div class="4" id="fechaPadre">
+                <input id="fecha" type="date" value="@maxFecha"
+                       min="@minFecha"
+                       max="@maxFecha" />
+                <a href="/Reservas/@urlNombre/@urlId/hoy" style="width:200px" class="btn btn-success form-control">Buscar horas hoy</a>
+            </div>
+        }
     }
-    else
-    {
-        fecha = fechaMañana.ToString("yyyy-MM-dd");
-        <div class="4" id="fechaPadre">
-            <input id="fecha" type="date" value="@maxFecha"
-                   min="@minFecha"
-                   max="@maxFecha" />
-            <a href="/Reservas/@urlNombre/@urlId/hoy" style="width:200px" class="btn btn-success form-control">Buscar horas hoy</a>
-        </div>
-    }
-}
+</center>
 
-<br />
+
 <div class="row text-center" id="cuadroTexto">
     <div class="alert alert-info text-center invisible" style="width: 100%" id="alerta">
         <p id="mensaje"></p>
@@ -66,16 +61,13 @@
         <a class="btn btn-danger" id="btnCancelar1" onclick="cambiarSalirSinReservar()">Cancelar</a>
     </div>
 </div>
-<br />
 
-
-@*Steven*@
 <form method="post">
     <table class="table table-striped border">
         <tr id="nombres" class="table-secondary">
-            <th>Id</th>
-            <th>Estado</th>
-            <th>Nombre</th>
+            <th>Pista</th>
+            <th>Hora</th>
+            <th>Fecha</th>
             <th>Acción</th>
         </tr>
         @foreach (var item in Model.Reservas)
@@ -83,7 +75,7 @@
             @if (item.Fecha == fecha)
             {
                 <tr class="text-white">
-                    <td>@Html.DisplayFor(m => item.Id)</td>
+                    <td>@Html.DisplayFor(m => item.Pista)</td>
                     <td>@Html.DisplayFor(m => item.Hora)</td>
                     <td>@Html.DisplayFor(m => item.Fecha)</td>
                     <td>
