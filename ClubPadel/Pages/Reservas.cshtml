@@ -73,9 +73,9 @@
 <form method="post">
     <table class="table table-striped border">
         <tr id="nombres" class="table-secondary">
-            <th>Id</th>
-            <th>Estado</th>
-            <th>Nombre</th>
+            <th>Hora</th>
+            <th>Fecha</th>
+            <th>Pista</th>
             <th>Acción</th>
         </tr>
         @foreach (var item in Model.Reservas)
@@ -83,9 +83,9 @@
             @if (item.Fecha == fecha)
             {
                 <tr class="text-white">
-                    <td>@Html.DisplayFor(m => item.Id)</td>
                     <td>@Html.DisplayFor(m => item.Hora)</td>
                     <td>@Html.DisplayFor(m => item.Fecha)</td>
+                    <td>@Html.DisplayFor(m => item.Pista)</td>
                     <td>
                         @if (item.IdCliente == null)
                         {
@@ -103,7 +103,6 @@
                     </td>
                 </tr>
             }
-
         }
     </table>
     <br />
