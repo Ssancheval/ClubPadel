@@ -1,0 +1,69 @@
+﻿.box-padre {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.box-hijo1 {
+    width: 60%;
+}
+
+.box-hijo2 {
+    width: 40%;
+}
+
+.box-borde {
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border: 1px solid white;
+    padding: 20px;
+    margin-left: 20px;
+    height: auto;
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.box-datos {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+table {
+    border: 1px solid white;
+}
+
+th, td {
+    width: 213px;
+}
+
+.tabla-head {
+    display: block;
+    border: 1px solid white;
+    height: 100px;
+    overflow-y: auto;
+}
+
+thead, tbody {
+    display: block;
+    width: auto;
+}
+
+tbody {
+    height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.btn-accion {
+    width: 120px;
+}
+
+.btn-salir {
+    background-color: brown;
+    width: 120px;
+}
