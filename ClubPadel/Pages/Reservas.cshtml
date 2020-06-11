@@ -39,6 +39,30 @@
         }
     }
 </center>
+<center>
+    @{
+        if (urlFecha == "hoy")
+        {
+            fecha = fechaHoy.ToString("yyyy-MM-dd");
+            <div class="4" id="fechaPadre">
+                <input id="fecha" type="date" value="@minFecha"
+                       min="@minFecha"
+                       max="@maxFecha" />
+                <a href="/Reservas/@urlNombre/@urlId/mañana" style="width:200px" class="btn btn-success form-control">Buscar horas mañana</a>
+            </div>
+        }
+        else
+        {
+            fecha = fechaMañana.ToString("yyyy-MM-dd");
+            <div class="4" id="fechaPadre">
+                <input id="fecha" type="date" value="@maxFecha"
+                       min="@minFecha"
+                       max="@maxFecha" />
+                <a href="/Reservas/@urlNombre/@urlId/hoy" style="width:200px" class="btn btn-success form-control">Buscar horas hoy</a>
+            </div>
+        }
+    }
+</center>
 <br />
 <div class="box-padre">
     <div class="box-hijo1">
