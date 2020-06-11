@@ -13,136 +13,90 @@
     var fecha = "";
 }
 
-<br />
-<h1 align="center" class="text-info" id="titulo">Reservas Pistas</h1>
-<br />
-<div class="col-6">
-    <div class="col-sm-2">
-    <h5 name="usuario">@urlNombre</h5>
-    <a asp-page="Index" style="background-color:brown; width:120px" class="btn btn-success form-control">Cerrar sesión</a>
-</div>
-</div>
-<br />
+<link rel="stylesheet" type="text/css" href="~/css/reservas.css">
 
+<div class="box-padre">
+    <div class="box-hijo1">
+        <h3 class="text-white" id="titulo">Reservas Pistas</h3>
+    </div>
+    <div class="box-hijo2 text-right">
+        <h4 class="text-white" id="titulo">Bienvenido @urlNombre</h4>
+        <a asp-page="Index" class="btn btn-success btn-salir form-control">Cerrar sesión</a>
+    </div>
+</div>
+<br />
 <center>
     @{
         if (urlFecha == "hoy")
         {
             fecha = fechaHoy.ToString("yyyy-MM-dd");
-            <div class="4" id="fechaPadre">
-                <input id="fecha" type="date" value="@minFecha"
-                       min="@minFecha"
-                       max="@maxFecha" />
-                <a href="/Reservas/@urlNombre/@urlId/mañana" style="width:200px" class="btn btn-success form-control">Buscar horas mañana</a>
-            </div>
+            <a href="/Reservas/@urlNombre/@urlId/mañana" style="width:200px" class="btn btn-success form-control">Buscar horas mañana</a>
         }
         else
         {
             fecha = fechaMañana.ToString("yyyy-MM-dd");
-            <div class="4" id="fechaPadre">
-                <input id="fecha" type="date" value="@maxFecha"
-                       min="@minFecha"
-                       max="@maxFecha" />
-                <a href="/Reservas/@urlNombre/@urlId/hoy" style="width:200px" class="btn btn-success form-control">Buscar horas hoy</a>
-            </div>
+            <a href="/Reservas/@urlNombre/@urlId/hoy" style="width:200px" class="btn btn-success form-control">Buscar horas hoy</a>
         }
     }
 </center>
+<br />
+<div class="box-padre">
+    <div class="box-hijo1">
+                <table class="table">
+                    <thead>
+                        <tr class="table-secondary">
+                            <th>Hora</th>
+                            <th>Fecha</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Reservas)
+                         {
+                            @if (item.Fecha == fecha)
+                            {
+                                <tr class="text-white">
+                                    <td>@Html.DisplayFor(m => item.Hora)</td>
+                                    <td>@Html.DisplayFor(m => item.Fecha)</td>
+                                    <td>
+                                        @if (item.IdCliente == null)
+                                        {
+                                            <form method="post">
+                                                <input class="btn btn-success btn-accion" type="submit" value="Reservar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                                            </form>
+                                        }
+                                        else if (item.IdCliente == int.Parse(urlId))
+                                        {
+                                            <form method="post">
+                                                <input class="btn btn-danger btn-accion" type="submit" value="Cancelar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                                            </form>
+                                        }
+                                        else
+                                        {
+                                            <input class="btn btn-dark disabled btn-accion" type="submit" value="Ocupado" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                                        }
 
+                                    </td>
+                                </tr>
+                            }
 
-<div class="row text-center" id="cuadroTexto">
-    <div class="alert alert-info text-center invisible" style="width: 100%" id="alerta">
-        <p id="mensaje"></p>
-        <a class="btn btn-success" id="btnAceptar1">Aceptar</a>
-        <a class="btn btn-success invisible" id="btnAceptar2" onclick="hacerInvisible()">Aceptar</a>
-        <a class="btn btn-success invisible" id="btnAceptar3">Aceptar</a>
-        <a class="btn btn-danger invisible" id="btnCancelar3" onclick="hacerInvisible()">Cancelar</a>
-        <a class="btn btn-danger invisible" id="btnCancelar2" onclick="hacerVisible()">Cancelar</a>
-        <a class="btn btn-danger" id="btnCancelar1" onclick="cambiarSalirSinReservar()">Cancelar</a>
+                         }
+                    </tbody>
+                
+                </table>
+    </div>
+    <div class="box-hijo2 box-borde text-white">
+        <form method="post">
+            <h4>Mis reservas</h4>
+            @foreach (var item in Model.Reservas)
+            {
+                if (item.IdCliente == int.Parse(urlId))
+                {   
+                    <p class="box-datos"><b>Día:</b>@item.Fecha <b>Hora:</b>@item.Hora</p>
+                    <input class="btn btn-danger" type="submit" value="Cancelar reserva" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                    
+                }
+            }
+        </form>
     </div>
 </div>
-
-<form method="post">
-    <table class="table table-striped border">
-        <tr id="nombres" class="table-secondary">
-            <th>Pista</th>
-            <th>Hora</th>
-            <th>Fecha</th>
-            <th>Acción</th>
-        </tr>
-        @foreach (var item in Model.Reservas)
-        {
-            @if (item.Fecha == fecha)
-            {
-                <tr class="text-white">
-                    <td>@Html.DisplayFor(m => item.Pista)</td>
-                    <td>@Html.DisplayFor(m => item.Hora)</td>
-                    <td>@Html.DisplayFor(m => item.Fecha)</td>
-                    <td>
-                        @if (item.IdCliente == null)
-                        {
-                            <input class="btn btn-success" type="submit" value="Reservar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
-                        }
-                        else if (item.IdCliente == int.Parse(urlId))
-                        {
-                            <input class="btn btn-danger" type="submit" value="Cancelar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
-                        }
-                        else
-                        {
-                            <input class="btn btn-dark disabled" type="submit" value="Ocupado" asp-route-id="@item.Id" asp-page-handler="Cambio" />
-                        }
-
-                    </td>
-                </tr>
-            }
-
-        }
-    </table>
-    <br />
-    <br />
-</form>
-
-
-<div id="horas" style="padding: 4px;
-            width: 100%;
-            height: 550px;
-            overflow: auto;">
-</div>
-<br />
-
-<script>
-    //function buscarHoras() {
-    //    let valor = document.getElementById("fecha").value;
-    //    let msValor = Date.parse(valor);
-    //    let fechaValor = new Date(msValor);
-
-    //    let ms1 = Date.parse(fechaActual());
-    //    let fecha1 = new Date(ms1);
-
-    //    if (fechaValor.getTime() == fecha1.getTime()) {
-    //        location.href = "/ReservasPistaA";
-    //    } else {
-    //        location.href = "/ReservaPistaB";
-    //    }
-    //}
-
-    function buscarHoras() {
-        let valor = document.getElementById("fecha").value;
-        if (valor == @maxFecha) {
-            location.href = "/Reservas/" + @urlNombre + "/" + @urlId + "/mañana";
-        } else {
-            location.href = "/Reservas/" + @urlNombre + "/" + @urlId + "/hoy";
-        }
-        //let msValor = Date.parse(valor);
-        //let fechaValor = new Date(msValor);
-
-        //let ms1 = Date.parse(fechaActual());
-        //let fecha1 = new Date(ms1);
-
-        //if (fechaValor.getTime() == fecha1.getTime()) {
-        //    location.href = "/ReservasPistaA";
-        //} else {
-        //    location.href = "/ReservaPistaB";
-        //}
-    }
-</script>

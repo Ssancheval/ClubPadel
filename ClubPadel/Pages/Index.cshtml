@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <div>
                         <p class="box-datos">Usuario</p>
-                        <input name="nombreUsuario" asp-for="Cliente.User" class="form-control box-datos" id="usuario" />
+                        <input name="nombreUsuario" asp-for="Cliente.User" class="form-control box-datos" id="usuario" placeholder="Pepe"/>
                         <span asp-validation-for="Cliente.User" class="text-danger"></span>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <div>
                         <p class="box-datos">Contraseña</p>
-                        <input type="password" name="contraseñaUsuario" asp-for="Cliente.Password" class="form-control" id="contrasena" />
+                        <input type="password" name="contraseñaUsuario" asp-for="Cliente.Password" class="form-control" id="contrasena" placeholder="123"/>
                         <span asp-validation-for="Cliente.Password" class="text-danger"></span>
                     </div>
                 </div>

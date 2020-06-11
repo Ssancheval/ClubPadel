@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using ClubPadel.Models;
+﻿using ClubPadel.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ClubPadel.Pages
 {
@@ -34,7 +34,7 @@ namespace ClubPadel.Pages
         {
             Clientes = await _db.Cliente.ToListAsync();
         }
-   
+
         public async Task<IActionResult> OnPost(string nombreUsuario, string contraseñaUsuario)
         {
             try
