@@ -15,15 +15,15 @@
 
 <link rel="stylesheet" type="text/css" href="~/css/reservas.css">
 
-<div class="box-padre">
-    <div class="box-hijo1">
-        <h3 class="text-white" id="titulo">Reservas Pistas</h3>
-    </div>
-    <div class="box-hijo2 text-right">
+    <h1 class="text-white text-center" id="titulo">Reservas Pistas</h1>
+
+<div class="box-hijo">
+    <div class="box-hijo2 text-left">
         <h4 class="text-white" id="titulo">Bienvenido @urlNombre</h4>
         <a asp-page="Index" class="btn btn-success btn-salir form-control">Cerrar sesión</a>
     </div>
 </div>
+
 <br />
 <center>
     @{
@@ -42,48 +42,48 @@
 <br />
 <div class="box-padre">
     <div class="box-hijo1">
-                <table class="table">
-                    <thead>
-                        <tr class="table-secondary">
-                            <th>Hora</th>
-                            <th>Fecha</th>
-                            <th>Acción</th>
+        <table class="table">
+            <thead>
+                <tr class="table-secondary">
+                    <th>Hora</th>
+                    <th>Fecha</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Reservas)
+                {
+                    @if (item.Fecha == fecha)
+                    {
+                        <tr class="text-white">
+                            <td>@Html.DisplayFor(m => item.Hora)</td>
+                            <td>@Html.DisplayFor(m => item.Fecha)</td>
+                            <td>
+                                @if (item.IdCliente == null)
+                                {
+                                    <form method="post">
+                                        <input class="btn btn-success btn-accion" type="submit" value="Reservar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                                    </form>
+                                }
+                                else if (item.IdCliente == int.Parse(urlId))
+                                {
+                                    <form method="post">
+                                        <input class="btn btn-danger btn-accion" type="submit" value="Cancelar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                                    </form>
+                                }
+                                else
+                                {
+                                    <input class="btn btn-dark disabled btn-accion" type="submit" value="Ocupado" asp-route-id="@item.Id" asp-page-handler="Cambio" />
+                                }
+
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.Reservas)
-                         {
-                            @if (item.Fecha == fecha)
-                            {
-                                <tr class="text-white">
-                                    <td>@Html.DisplayFor(m => item.Hora)</td>
-                                    <td>@Html.DisplayFor(m => item.Fecha)</td>
-                                    <td>
-                                        @if (item.IdCliente == null)
-                                        {
-                                            <form method="post">
-                                                <input class="btn btn-success btn-accion" type="submit" value="Reservar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
-                                            </form>
-                                        }
-                                        else if (item.IdCliente == int.Parse(urlId))
-                                        {
-                                            <form method="post">
-                                                <input class="btn btn-danger btn-accion" type="submit" value="Cancelar" asp-route-id="@item.Id" asp-page-handler="Cambio" />
-                                            </form>
-                                        }
-                                        else
-                                        {
-                                            <input class="btn btn-dark disabled btn-accion" type="submit" value="Ocupado" asp-route-id="@item.Id" asp-page-handler="Cambio" />
-                                        }
+                    }
 
-                                    </td>
-                                </tr>
-                            }
+                }
+            </tbody>
 
-                         }
-                    </tbody>
-                
-                </table>
+        </table>
     </div>
     <div class="box-hijo2 box-borde text-white">
         <form method="post">
@@ -91,10 +91,10 @@
             @foreach (var item in Model.Reservas)
             {
                 if (item.IdCliente == int.Parse(urlId))
-                {   
+                {
                     <p class="box-datos"><b>Día:</b>@item.Fecha <b>Hora:</b>@item.Hora</p>
                     <input class="btn btn-danger" type="submit" value="Cancelar reserva" asp-route-id="@item.Id" asp-page-handler="Cambio" />
-                    
+
                 }
             }
         </form>
