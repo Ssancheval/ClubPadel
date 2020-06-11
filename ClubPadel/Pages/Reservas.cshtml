@@ -23,22 +23,7 @@
         <a asp-page="Index" class="btn btn-success btn-salir form-control">Cerrar sesión</a>
     </div>
 </div>
-
 <br />
-<center>
-    @{
-        if (urlFecha == "hoy")
-        {
-            fecha = fechaHoy.ToString("yyyy-MM-dd");
-            <a href="/Reservas/@urlNombre/@urlId/mañana" style="width:200px" class="btn btn-success form-control">Buscar horas mañana</a>
-        }
-        else
-        {
-            fecha = fechaMañana.ToString("yyyy-MM-dd");
-            <a href="/Reservas/@urlNombre/@urlId/hoy" style="width:200px" class="btn btn-success form-control">Buscar horas hoy</a>
-        }
-    }
-</center>
 <center>
     @{
         if (urlFecha == "hoy")
@@ -63,6 +48,20 @@
         }
     }
 </center>
+@**<center>
+    @{
+        if (urlFecha == "hoy")
+        {
+            fecha = fechaHoy.ToString("yyyy-MM-dd");
+            <a href="/Reservas/@urlNombre/@urlId/mañana" style="width:200px" class="btn btn-success form-control">Buscar horas mañana</a>
+        }
+        else
+        {
+            fecha = fechaMañana.ToString("yyyy-MM-dd");
+            <a href="/Reservas/@urlNombre/@urlId/hoy" style="width:200px" class="btn btn-success form-control">Buscar horas hoy</a>
+        }
+    }
+</center>*@
 <br />
 <div class="box-padre">
     <div class="box-hijo1">
