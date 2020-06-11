@@ -43,7 +43,7 @@ namespace ClubPadel.Pages
             prueba = fecha.Where(s => s.Fecha.Contains(maxFecha)).Count();
             if (prueba == 0)
             {
-                _db.Database.ExecuteSqlRaw("execute InsertarRegistros");
+                //_db.Database.ExecuteSqlRaw("execute InsertarRegistros");
             }
         }
 
