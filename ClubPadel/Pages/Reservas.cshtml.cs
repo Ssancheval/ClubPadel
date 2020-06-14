@@ -49,15 +49,6 @@ namespace ClubPadel.Pages
             }
         }
 
-        public async Task<IActionResult> OnPost()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-            return RedirectToPage("Reservas");
-        }
-
         public async Task<IActionResult> OnPostCambio(int id, int idCli)
         {
             var tablita = await _db.Reserva.FindAsync(id);//busca en la base de datos el registro

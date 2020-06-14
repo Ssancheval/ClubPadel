@@ -56,6 +56,7 @@ namespace ClubPadel
             {
                 endpoints.MapRazorPages();
             });
+
         }
     }
 }
